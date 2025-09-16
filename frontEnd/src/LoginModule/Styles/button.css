@@ -1,0 +1,71 @@
+/* File: components/button.css */
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn--primary {
+  background: linear-gradient(135deg, var(--cinetrone-gold), var(--cinetrone-gold-dark));
+  color: var(--cinetrone-black);
+  box-shadow: 0 4px 15px rgba(192, 160, 104, 0.3);
+}
+
+.login-btn--primary:hover {
+  background: linear-gradient(135deg, var(--cinetrone-gold-light), var(--cinetrone-gold));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(192, 160, 104, 0.4);
+}
+
+.login-btn--outline {
+  background: transparent;
+  color: var(--cinetrone-gold);
+  border: 2px solid var(--cinetrone-gold);
+}
+
+.login-btn--outline:hover {
+  background: var(--cinetrone-gold);
+  color: var(--cinetrone-black);
+}
+
+.login-btn--full-width {
+  width: 100%;
+}
+
+.login-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Button Loader */
+.login-btn-loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-left-color: var(--cinetrone-black);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+.login-btn--outline .btn-loader {
+  border-color: rgba(192, 160, 104, 0.3);
+  border-left-color: var(--cinetrone-gold);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

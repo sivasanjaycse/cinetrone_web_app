@@ -1,0 +1,50 @@
+/* File: components/otp.css */
+.otp-inputs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.otp-digit {
+  width: 45px;
+  height: 50px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  background: var(--cinetrone-black);
+  border: 2px solid var(--cinetrone-border);
+  border-radius: 8px;
+  color: var(--cinetrone-gold);
+  transition: all 0.3s ease;
+}
+
+.otp-digit:focus {
+  outline: none;
+  border-color: var(--cinetrone-gold);
+  box-shadow: 0 0 0 3px rgba(192, 160, 104, 0.1);
+}
+
+.otp-digit.filled {
+  background: var(--cinetrone-gold);
+  color: var(--cinetrone-black);
+}
+
+/* Responsive OTP inputs */
+@media (max-width: 480px) {
+  .otp-inputs {
+    gap: 8px;
+  }
+  .otp-digit {
+    width: 40px;
+    height: 45px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .otp-digit {
+    width: 35px;
+    height: 40px;
+  }
+}
