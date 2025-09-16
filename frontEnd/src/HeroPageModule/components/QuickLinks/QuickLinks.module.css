@@ -1,0 +1,25 @@
+
+.quickLinks {
+  background-color: var(--bg-black);
+  padding: 60px 0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: var(--primary-color);
+  color: var(--bg-black);
+}

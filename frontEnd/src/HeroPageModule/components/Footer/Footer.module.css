@@ -1,0 +1,137 @@
+.footer {
+  background: #1a1a1a;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  padding: 60px 0 30px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.footer__title {
+  font-size: 20px;
+  color: #c0a068;
+  margin-bottom: 16px;
+}
+
+.footer__subtitle {
+  font-size: 16px;
+  color: #c0a068;
+  margin-bottom: 16px;
+}
+
+.footer__tagline {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 24px;
+}
+
+.footer__social {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer__social a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer__social a:hover {
+  color: #c0a068;
+}
+
+.contactInfo p {
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.contactInfo strong {
+  color: #c0a068;
+}
+
+.footer__links {
+  list-style: none;
+}
+
+.footer__links li {
+  margin-bottom: 8px;
+}
+
+.footer__links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer__links a:hover {
+  color: #c0a068;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.formControl {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: #ffffff;
+  border-radius: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.formControl::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.formControl:focus {
+  color: #c0a068;
+  outline: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  text-decoration: none;
+  position: relative;
+  background: rgba(167, 169, 169, 0.15); /* Replaced secondary color var */
+  color: #ffffff;
+}
+
+.btn:hover {
+  background: rgba(167, 169, 169, 0.25);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.footer__bottom {
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+}
