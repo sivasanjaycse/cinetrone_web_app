@@ -1,4 +1,3 @@
-// File: ResetPasswordForm.jsx
 import React, { useState } from 'react';
 
 const ResetPasswordForm = ({ onCreateNewPassword, loading }) => {

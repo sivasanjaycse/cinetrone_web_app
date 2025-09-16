@@ -123,7 +123,7 @@ const OtpOverlay = ({ email, onVerifyOtp, onResendOtp, onClose, loading, error }
     <div style={overlayStyles}>
       <div style={cardStyles}>
         <h2 className="auth-title">Verify Your Account</h2>
-        <p className="auth-subtitle">Enter the 6-digit code sent to {email}</p>
+        <p className="auth-subtitle">Enter the 6-digit code sent to {email}.<br/>Kindly check spam if not received.</p>
         <form id="otp-form" className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="otp-input" className="form-label">Verification Code</label>

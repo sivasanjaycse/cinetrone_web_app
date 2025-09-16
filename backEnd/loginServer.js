@@ -1,88 +1,24 @@
 const express = require('express');
-const connectDB = require('./mongooseConnection'); // From previous answer
-const User = require('./model/User'); // Import the User model
+const cors = require('cors');
 const bcrypt = require('bcryptjs');
-const { sendEmail } = require('./emailService'); // Import our email function
 
-// Connect to database
+const connectDB = require('./mongooseConnection');
+const User = require('./model/User');
+const Otp = require('./model/Otp');
+const { sendEmail } = require('./emailService');
+
+// --- 1. INITIAL SETUP ---
+
+// Connect to the database
 connectDB();
 
 const app = express();
 
-// Middleware to parse JSON request bodies
-app.use(express.json());
+// Middleware
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.json()); // To parse JSON request bodies
 
-//--- ROUTES ---//
-
-/**
- * @route   POST /register
- * @desc    Register a new user
- * @access  Public
- */
-app.post('/register', async (req, res) => {
-  // Destructure name, email, phone, and password from request body
-  const { name, email, phone, password } = req.body;
-
-  try {
-    // Check if user already exists
-    let user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ msg: 'User already exists' });
-    }
-
-    // Create a new user instance (password will be hashed by the pre-save hook)
-    user = new User({
-      name,
-      email,
-      phone,
-      password,
-    });
-
-    // Save the user to the database
-    await user.save();
-
-    res.status(201).json({ msg: '✅ User registered successfully' });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
-  }
-});
-
-/**
- * @route   POST /login
- * @desc    Authenticate user & get token
- * @access  Public
- */
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    // Check if user exists
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ msg: 'Authentication failed: Invalid credentials' });
-    }
-
-    // Compare the provided password with the hashed password in the database
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ msg: 'Authentication failed: Invalid credentials' });
-    }
-
-    // If credentials match, send success response
-    // In a real app, you would generate and return a JWT (JSON Web Token) here
-    res.status(200).json({ msg: '🔑 Authentication successful!' });
-
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
-  }
-});
-
-// --- NEW: In-Memory OTP Storage ---
-// A Map to temporarily store OTPs with the user's email as the key.
-// Format: { 'user@example.com': '123456' }
-const otpStore = new Map();
+// --- 2. HELPER FUNCTIONS ---
 
 /**
  * Generates a random 6-digit OTP.
@@ -92,31 +28,23 @@ const generateOtp = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
-//--- OTP ROUTES ---//
+// --- 3. API ROUTES ---
 
-/**
- * @route   POST /registerOtp
- * @desc    Send an OTP for new user registration and store it
- * @access  Public
- */
+// == OTP Management Routes ==
+
 app.post('/registerOtp', async (req, res) => {
   const { email } = req.body;
-
   if (!email) {
     return res.status(400).json({ msg: 'Please provide an email address.' });
   }
 
   const otp = generateOtp();
   const subject = 'Your Registration OTP Code';
-  const text = `Welcome! Your One-Time Password (OTP) for registration is: ${otp}. This code is valid for 5 minutes.`;
+  const text = `Welcome to Cinetrone! Your One-Time Password (OTP) for registration is: ${otp}. This code is valid for 5 minutes. `;
 
   try {
-    // --- MODIFIED: Store the OTP with a 5-minute expiration ---
-    otpStore.set(email, otp);
-    setTimeout(() => {
-      otpStore.delete(email);
-    }, 300000); // 300,000 milliseconds = 5 minutes
-
+    // Store/update the OTP in the database (expires automatically via TTL index)
+    await Otp.findOneAndUpdate({ email }, { otp }, { upsert: true, new: true });
     await sendEmail(email, subject, text);
     res.status(200).json({ msg: `✅ OTP sent successfully to ${email}` });
   } catch (error) {
@@ -125,29 +53,26 @@ app.post('/registerOtp', async (req, res) => {
   }
 });
 
-/**
- * @route   POST /forgetPasswordOtp
- * @desc    Send an OTP for password reset and store it
- * @access  Public
- */
+// == THIS ROUTE IS NOW UPDATED ==
 app.post('/forgetPasswordOtp', async (req, res) => {
   const { email } = req.body;
-
   if (!email) {
     return res.status(400).json({ msg: 'Please provide an email address.' });
   }
 
-  const otp = generateOtp();
-  const subject = 'Your Password Reset Code';
-  const text = `You requested a password reset. Your OTP is: ${otp}. This code is valid for 5 minutes.`;
-
   try {
-    // --- MODIFIED: Store the OTP with a 5-minute expiration ---
-    otpStore.set(email, otp);
-    setTimeout(() => {
-      otpStore.delete(email);
-    }, 300000); // 5 minutes
+    // --- ADDED: Check if the user exists in the database ---
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ msg: 'User with this email does not exist.' });
+    }
+    // --- End of added check ---
 
+    const otp = generateOtp();
+    const subject = 'Your Password Reset Code';
+    const text = `Greetings from Cinetrone! You requested a password reset. Your Verification code is: ${otp}. This code is valid for 5 minutes.`;
+
+    await Otp.findOneAndUpdate({ email }, { otp }, { upsert: true, new: true });
     await sendEmail(email, subject, text);
     res.status(200).json({ msg: `✅ Password reset OTP sent successfully to ${email}` });
   } catch (error) {
@@ -157,63 +82,79 @@ app.post('/forgetPasswordOtp', async (req, res) => {
 });
 
 
-/**
- * @route   POST /verifyOtp
- * @desc    Verify the OTP provided by the user
- * @access  Public
- */
-app.post('/verifyOtp', (req, res) => {
+app.post('/verifyOtp', async (req, res) => {
   const { email, otp } = req.body;
-
   if (!email || !otp) {
-    return res.status(400).json({ msg: 'Please provide both email and OTP.' });
+    return res.status(400).json({ msg: 'Please provide both email and Verification Code.' });
   }
 
-  const storedOtp = otpStore.get(email);
+  const otpRecord = await Otp.findOne({ email, otp });
 
-  // Check if OTP exists in our store
-  if (!storedOtp) {
-    return res.status(400).json({ msg: 'OTP has expired or is invalid.' });
+  if (!otpRecord) {
+    return res.status(400).json({ msg: 'Verification Code has expired or is invalid.' });
   }
 
-  // Check if the provided OTP matches the stored one
-  if (storedOtp === otp) {
-    // --- IMPORTANT: Delete the OTP after successful verification ---
-    otpStore.delete(email);
-    res.status(200).json({ msg: '🎉 OTP verified successfully!' });
-  } else {
-    res.status(400).json({ msg: 'Invalid OTP.' });
+  // OTP is correct, delete it to prevent reuse
+  await Otp.deleteOne({ email });
+  res.status(200).json({ msg: 'Verified successfully!' });
+});
+
+// == User Authentication Routes ==
+
+app.post('/register', async (req, res) => {
+  const { name, email, phone, password } = req.body;
+
+  try {
+    if (await User.findOne({ email })) {
+      return res.status(400).json({ msg: 'User already exists' });
+    }
+
+    const newUser = new User({ name, email, phone, password });
+    await newUser.save(); // Password is hashed by the pre-save hook in the User model
+
+    res.status(201).json({ msg: '✅ User registered successfully' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 
-// (Your other routes like /register, /login, /registerOtp, etc., would be here)
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
 
-/**
- * @route   POST /reset-password
- * @desc    Reset a user's password after validation
- * @access  Protected (should be, see security note)
- */
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ msg: 'Authentication failed: Invalid credentials' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: 'Authentication failed: Invalid credentials' });
+    }
+
+    res.status(200).json({ msg: '🔑 Authentication successful!' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 app.post('/reset-password', async (req, res) => {
   const { email, newPassword } = req.body;
 
-  // Basic validation
   if (!email || !newPassword) {
     return res.status(400).json({ msg: 'Please provide both email and a new password.' });
   }
 
   try {
-    // Find the user by email
     const user = await User.findOne({ email });
-
     if (!user) {
       return res.status(404).json({ msg: 'User not found.' });
     }
 
-    // Set the new password on the user object
     user.password = newPassword;
-
-    // Save the user. The 'pre-save' hook in your User model will automatically hash the password.
-    await user.save();
+    await user.save(); // The pre-save hook will hash the new password
 
     res.status(200).json({ msg: '🔑 Password has been reset successfully!' });
   } catch (error) {
@@ -222,7 +163,8 @@ app.post('/reset-password', async (req, res) => {
   }
 });
 
-// (Your server listener code would be here)
+// --- 4. START SERVER ---
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);

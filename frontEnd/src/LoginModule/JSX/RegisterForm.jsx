@@ -4,7 +4,7 @@ const RegisterForm = ({ onRegister, onSwitchPage, loading }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    mobile: '',
+    phone: '',
     password: '',
     confirmPassword: '',
   });
@@ -40,7 +40,6 @@ const RegisterForm = ({ onRegister, onSwitchPage, loading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Basic validation before passing up
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
@@ -54,23 +53,54 @@ const RegisterForm = ({ onRegister, onSwitchPage, loading }) => {
         <h2 className="auth-title">Create Account</h2>
         <p className="auth-subtitle">Join CINETRONE today</p>
         <form id="register-form" className="auth-form" onSubmit={handleSubmit}>
-          {/* Form Groups */}
           <div className="form-group">
             <label htmlFor="name" className="form-label">Full Name</label>
-            <input type="text" id="name" value={formData.name} onChange={handleInputChange} className="form-control" placeholder="Enter your full name" required />
+            <input 
+              type="text" 
+              id="name" 
+              value={formData.name} 
+              onChange={handleInputChange} 
+              className="form-control" 
+              placeholder="Enter your full name" 
+              required 
+            />
           </div>
           <div className="form-group">
             <label htmlFor="email" className="form-label">Email Address</label>
-            <input type="email" id="email" value={formData.email} onChange={handleInputChange} className="form-control" placeholder="Enter your email" required />
+            <input 
+              type="email" 
+              id="email" 
+              value={formData.email} 
+              onChange={handleInputChange} 
+              className="form-control" 
+              placeholder="Enter your email" 
+              required 
+            />
           </div>
           <div className="form-group">
-            <label htmlFor="mobile" className="form-label">Mobile Number</label>
-            <input type="tel" id="mobile" value={formData.mobile} onChange={handleInputChange} className="form-control" placeholder="Enter 10-digit mobile number" required />
+            <label htmlFor="phone" className="form-label">Mobile Number</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              value={formData.phone}
+              onChange={handleInputChange} 
+              className="form-control" 
+              placeholder="Enter 10-digit mobile number" 
+              required 
+            />
           </div>
           <div className="form-group">
             <label htmlFor="password" className="form-label">Password</label>
             <div className="password-input">
-              <input type={showPasswords.password ? "text" : "password"} id="password" value={formData.password} onChange={handleInputChange} className="form-control" placeholder="Create a password" required />
+              <input 
+                type={showPasswords.password ? "text" : "password"} 
+                id="password" 
+                value={formData.password} 
+                onChange={handleInputChange} 
+                className="form-control" 
+                placeholder="Create a password" 
+                required 
+              />
               <button type="button" className="password-toggle" onClick={() => togglePasswordVisibility('password')}>
                 <span className="toggle-text">{showPasswords.password ? "Hide" : "Show"}</span>
               </button>
@@ -85,7 +115,15 @@ const RegisterForm = ({ onRegister, onSwitchPage, loading }) => {
           <div className="form-group">
             <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
             <div className="password-input">
-              <input type={showPasswords.confirmPassword ? "text" : "password"} id="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} className="form-control" placeholder="Confirm your password" required />
+              <input 
+                type={showPasswords.confirmPassword ? "text" : "password"} 
+                id="confirmPassword" 
+                value={formData.confirmPassword} 
+                onChange={handleInputChange} 
+                className="form-control" 
+                placeholder="Confirm your password" 
+                required 
+              />
               <button type="button" className="password-toggle" onClick={() => togglePasswordVisibility('confirmPassword')}>
                 <span className="toggle-text">{showPasswords.confirmPassword ? "Hide" : "Show"}</span>
               </button>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
-import OtpOverlay from './OtpOverlay'; // <-- IMPORT the new overlay
+import OtpOverlay from './OtpOverlay';
 import SuccessMessage from './SuccessMessage';
+import ErrorOverlay from './ErrorOverlay'; // <-- IMPORT the new ErrorOverlay
 import ResetPasswordForm from "./ResetPasswordForm";
 import CinetroneLogo from "../../assets/logo.png";
 import '../Styles/comman.css';
@@ -15,97 +17,131 @@ import '../Styles/button.css';
 import '../Styles/card.css';
 import '../Styles/form.css';
 
+const backendUrl="http://localhost:3000"
+const api = axios.create({
+  baseURL: backendUrl,
+});
+
 const AuthContainer = () => {
   const [currentPage, setCurrentPage] = useState('login');
   const [loading, setLoading] = useState(false);
   const [successInfo, setSuccessInfo] = useState(null);
-  const [otpError, setOtpError] = useState('');
+  const [errorInfo, setErrorInfo] = useState(null); // <-- NEW state for error overlay
   
   const [currentUserEmail, setCurrentUserEmail] = useState('');
-  const [generatedOtp, setGeneratedOtp] = useState('');
   const [isForgotPassword, setIsForgotPassword] = useState(false);
-
-  // --- NEW STATE to control the OTP overlay visibility ---
   const [showOtpOverlay, setShowOtpOverlay] = useState(false);
-
-  const simulateApiCall = () => {
-    setLoading(true);
-    return new Promise(resolve => setTimeout(() => {
-      setLoading(false);
-      resolve();
-    }, 1500));
-  };
-
-  const generateAndLogOtp = () => {
-    const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(newOtp);
-    console.log(`New OTP for ${currentUserEmail}: ${newOtp}`);
-  };
+  const [registrationData, setRegistrationData] = useState(null);
 
   const handleLogin = async (email, password) => {
-    await simulateApiCall();
-    setSuccessInfo({ title: "Welcome Back!", text: "You've successfully signed in to CINETRONE." });
+    setLoading(true);
+    try {
+      const response = await api.post('/login', { email, password });
+      setSuccessInfo({ title: "Welcome Back!", text: response.data.msg });
+    } catch (error) {
+      setErrorInfo({ title: "Login Failed", text: error.response?.data?.msg || 'An error occurred.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleRegister = async (formData) => {
-    await simulateApiCall();
-    setCurrentUserEmail(formData.email);
-    setIsForgotPassword(false);
-    generateAndLogOtp();
-    setShowOtpOverlay(true); // <-- SHOW OVERLAY instead of changing page
+    setLoading(true);
+    try {
+      setRegistrationData(formData); 
+      setCurrentUserEmail(formData.email);
+      setIsForgotPassword(false);
+      const response = await axios.post('http://localhost:3000/registerOtp', { email: formData.email });
+      setShowOtpOverlay(true);
+    } catch (error) {
+      setErrorInfo({ title: "Registration Failed", text: error.response?.data?.msg || 'An error occurred.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleResetPassword = async (email) => {
-    await simulateApiCall();
-    setCurrentUserEmail(email);
-    setIsForgotPassword(true);
-    generateAndLogOtp();
-    setShowOtpOverlay(true); // <-- SHOW OVERLAY instead of changing page
+    setLoading(true);
+    try {
+      setCurrentUserEmail(email);
+      setIsForgotPassword(true);
+      const response = await api.post('/forgetPasswordOtp', { email });
+      setShowOtpOverlay(true);
+    } catch (error) {
+      setErrorInfo({ title: "Request Failed", text: error.response?.data?.msg || 'An error occurred.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleVerifyOtp = async (otp) => {
-    await simulateApiCall();
-    if (otp === generatedOtp) {
-      setOtpError('');
-      setShowOtpOverlay(false); // <-- CLOSE OVERLAY on success
-      
+    setLoading(true);
+    try {
+      await api.post('/verifyOtp', { email: currentUserEmail, otp });
+      setShowOtpOverlay(false);
       if (isForgotPassword) {
         setCurrentPage('create-new-password');
       } else {
-        setSuccessInfo({ title: "Email Verified!", text: "Your account is active. You can now sign in." });
+        const response = await api.post('/register', registrationData);
+        setSuccessInfo({ title: "Account Created!", text: response.data.msg });
       }
-    } else {
-      setOtpError('Invalid verification code. Please try again.');
+    } catch (error) {
+      // Set the error for the OTP overlay specifically if it's still open
+      setShowOtpOverlay(false);
+      setErrorInfo({ title: "Verification Failed", text: error.response?.data?.msg || 'An error occurred.' });
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleCreateNewPassword = async (password) => {
-    await simulateApiCall();
-    console.log(`Password for ${currentUserEmail} has been reset to: ${password}`);
-    setSuccessInfo({ title: "Password Updated!", text: "Your password has been successfully updated. Please sign in." });
+    setLoading(true);
+    try {
+      const response = await api.post('/reset-password', {
+        email: currentUserEmail,
+        newPassword: password
+      });
+      setSuccessInfo({ title: "Password Updated!", text: response.data.msg });
+    } catch (error) {
+      setErrorInfo({ title: "Update Failed", text: error.response?.data?.msg || 'An error occurred.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleResendOtp = () => {
-    generateAndLogOtp();
+  const handleResendOtp = async () => {
+    try {
+      const endpoint = isForgotPassword ? '/forgetPasswordOtp' : '/registerOtp';
+      await api.post(endpoint, { email: currentUserEmail });
+    } catch (error) {
+       setErrorInfo({ title: "Resend Failed", text: 'Could not resend OTP. Please try again.' });
+    }
   };
 
   const handleCloseSuccess = () => {
     setSuccessInfo(null);
     setCurrentPage('login');
   };
+  
+  const handleCloseError = () => {
+    setErrorInfo(null);
+  };
+
+  const switchPage = (page) => {
+    setCurrentPage(page);
+  }
 
   const renderPage = () => {
     switch (currentPage) {
       case 'register':
-        return <RegisterForm onRegister={handleRegister} onSwitchPage={setCurrentPage} loading={loading} />;
+        return <RegisterForm onRegister={handleRegister} onSwitchPage={switchPage} loading={loading} />;
       case 'forgot-password':
-        return <ForgotPasswordForm onResetPassword={handleResetPassword} onSwitchPage={setCurrentPage} loading={loading} />;
-      // <-- OTP CASE IS REMOVED FROM HERE
+        return <ForgotPasswordForm onResetPassword={handleResetPassword} onSwitchPage={switchPage} loading={loading} />;
       case 'create-new-password':
         return <ResetPasswordForm onCreateNewPassword={handleCreateNewPassword} loading={loading} />;
       case 'login':
       default:
-        return <LoginForm onLogin={handleLogin} onSwitchPage={setCurrentPage} loading={loading} />;
+        return <LoginForm onLogin={handleLogin} onSwitchPage={switchPage} loading={loading} />;
     }
   };
 
@@ -126,7 +162,6 @@ const AuthContainer = () => {
           </div>
         </main>
         
-        {/* Conditionally render the OTP overlay */}
         {showOtpOverlay && (
           <OtpOverlay
             email={currentUserEmail}
@@ -134,7 +169,6 @@ const AuthContainer = () => {
             onResendOtp={handleResendOtp}
             onClose={() => setShowOtpOverlay(false)}
             loading={loading}
-            error={otpError}
           />
         )}
 
@@ -143,6 +177,14 @@ const AuthContainer = () => {
             title={successInfo.title}
             text={successInfo.text}
             onClose={handleCloseSuccess}
+          />
+        )}
+
+        {errorInfo && (
+          <ErrorOverlay
+            title={errorInfo.title}
+            text={errorInfo.text}
+            onClose={handleCloseError}
           />
         )}
       </div>

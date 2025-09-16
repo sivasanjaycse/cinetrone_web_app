@@ -27,7 +27,7 @@ const ForgotPasswordForm = ({ onResetPassword, onSwitchPage, loading }) => {
             />
           </div>
           <button type="submit" className="login-btn login-btn--primary login-btn--full-width" disabled={loading}>
-            {loading ? <div className="login-btn-loader"></div> : <span className="login-btn-text">Send Instructions</span>}
+            {loading ? <div className="login-btn-loader"></div> : <span className="login-btn-text">Send Verification Code</span>}
           </button>
         </form>
         <div className="auth-links">
