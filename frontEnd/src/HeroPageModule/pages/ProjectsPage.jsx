@@ -31,7 +31,7 @@ const ProjectsPage = () => {
       <Header />
       <BackButton />
       {/* FIX #2: Use an imported variable for the background image. */}
-      <header className="pageHeader" style={{backgroundImage: `url(${Project1})`}}>
+      <header className="pageHeader">
         <h1 className="pageTitle">Our Projects</h1>
       </header>
       <div className="pageContent">

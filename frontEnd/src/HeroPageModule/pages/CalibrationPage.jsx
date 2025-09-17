@@ -1,7 +1,7 @@
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import BackButton from "../components/BackButton/BackButton";
-import ConsultationForm from "../components/common/ConsultationForm";
+import CalibrationForm from "../components/common/CalibrationForm";
 
 
 const CalibrationPage = () => {
@@ -25,7 +25,7 @@ const CalibrationPage = () => {
           <p>
             Choose from basic, intermediate, or advanced calibration packages. Prices will be updated five days before launch.
           </p>
-          <ConsultationForm serviceType="calibration" />
+          <CalibrationForm/>
         </div>
       </div>
       <Footer />

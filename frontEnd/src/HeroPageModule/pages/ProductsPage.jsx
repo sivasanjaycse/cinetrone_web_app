@@ -24,7 +24,7 @@ const ProductsPage = () => {
       <Header />
       <BackButton />
       {/* 3. Use an imported variable for the header background */}
-      <header className="pageHeader" style={{backgroundImage: `url(${Product1})`}}>
+      <header className="pageHeader">
         <h1 className="pageTitle">Product Gallery</h1>
       </header>
       <div className="pageContent">

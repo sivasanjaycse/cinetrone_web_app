@@ -23,7 +23,7 @@ const Header = () => {
           className={`${styles.nav__menu} ${isMenuOpen ? styles.active : ""}`}
           id="nav-menu"
         >
-          <li><Link to="/#about" className={styles.nav__link} onClick={closeMenu}>About</Link></li>
+          <li><Link to="/about" className={styles.nav__link} onClick={closeMenu}>About</Link></li>
           <li><Link to="/consultation" className={styles.nav__link} onClick={closeMenu}>Consultation</Link></li>
           <li><Link to="/calibration" className={styles.nav__link} onClick={closeMenu}>Calibration</Link></li>
           <li><Link to="/projects" className={styles.nav__link} onClick={closeMenu}>Projects</Link></li>

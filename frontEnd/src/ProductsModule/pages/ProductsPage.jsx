@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { useAppContext } from "../hooks/useAppContext";
+import { useAppContext } from "../../hooks/useAppContext";
 import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
 import { getDiscountedPrice } from "../context/AppContext";

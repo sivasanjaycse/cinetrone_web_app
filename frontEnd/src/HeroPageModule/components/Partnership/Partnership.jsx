@@ -30,7 +30,7 @@ const Partnership = () => {
           <div className={styles.videoWrapper}>
             
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Dummy video
+              src="https://youtube.com/shorts/C_OyyR-Vqv0?si=C8EPJlJ6NbmwqLMK"
               title="Partner Testimonial"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

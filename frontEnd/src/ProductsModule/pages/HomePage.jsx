@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppContext } from "../hooks/useAppContext";
+import { useAppContext } from "../../hooks/useAppContext";
 import ProductCard from "../components/ProductCard";
 import "./HomePage.css";
 const HomePage = () => {

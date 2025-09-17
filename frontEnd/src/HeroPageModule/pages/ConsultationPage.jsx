@@ -20,7 +20,7 @@ const ConsultationPage = () => {
           <p>
             Whether you're planning a luxury home theatre, outdoor cinema, or advanced AV automation, our experts guide you step by step from concept to execution.Get in touch today and let's turn your dream setup into reality.
           </p>
-          <ConsultationForm serviceType="consultation" />
+          <ConsultationForm/>
         </div>
       </div>
       <Footer />

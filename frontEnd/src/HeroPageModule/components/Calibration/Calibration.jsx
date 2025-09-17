@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "../common/Common.module.css";
 // Corrected the image import by removing the curly braces
-import CalibrationImg from '../../assets/calibration.webp';
+import CalibrationImg from '../../assets/calibration.png';
 
 const Calibration = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppContext } from "../hooks/useAppContext";
+import { useAppContext } from "../../hooks/useAppContext";
 import './CategoriesPage.css'
 
 const CategoriesPage = () => {
