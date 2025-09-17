@@ -1,0 +1,53 @@
+/* src/index.css */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap");
+
+:root {
+  --primary-color: #c0a068;
+  --primary-hover-color: #a68856;
+  --text-light: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --bg-dark: #1a1a1a;
+  --bg-black: #000000;
+  --border-color: rgba(192, 160, 104, 0.2);
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-black);
+  color: var(--text-light);
+  padding-top: 80px; /* Offset for fixed header */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-hover-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 48px;
+    color: var(--primary-color);
+    text-shadow: 0 0 12px rgba(192, 160, 104, 0.5);
+}

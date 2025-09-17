@@ -1,0 +1,57 @@
+.product-list-container {
+    padding: 60px 20px;
+}
+
+/* New: Styles for Search and Filter */
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.search-bar, .sort-select {
+    padding: 12px 15px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.search-bar {
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.sort-select {
+    cursor: pointer;
+}
+
+.search-bar:focus, .sort-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.no-products-found {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    padding: 40px 0;
+}
+
+/* Changed: Smaller cards and more gap */
+.product-grid {
+    display: grid;
+    /* Cards will be smaller, allowing for more per row */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Increased space between cards */
+    gap: 40px;
+}
+
+.show-more-container {
+    text-align: center;
+    margin-top: 50px;
+}
