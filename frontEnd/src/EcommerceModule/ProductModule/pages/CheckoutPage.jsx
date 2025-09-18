@@ -3,14 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { useNotification } from '../../context/NotificationContext';
+import api from '../../../api';
+import Spinner from '../../components/Spinner/Spinner';
 import './CheckoutPage.css';
 import '../ProductModule.css';
 
 const CheckoutPage = () => {
   const { isLoggedIn, user } = useAuth();
-  const { clearCart, cartItems } = useCart();
+  const { cartItems, cartTotal, clearCart } = useCart();
   const { showNotification } = useNotification();
   const navigate = useNavigate();
+
+  const [isProcessing, setIsProcessing] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(!isLoggedIn);
   const [formData, setFormData] = useState({
     name: '',
@@ -23,9 +27,9 @@ const CheckoutPage = () => {
   useEffect(() => {
     if (isLoggedIn && user) {
       setFormData({
-        name: user.name,
-        mobile: user.mobile,
-        email: user.email,
+        name: user.name || '',
+        mobile: user.mobile || '',
+        email: user.email || '',
         address: '',
         pincode: ''
       });
@@ -33,25 +37,39 @@ const CheckoutPage = () => {
     }
   }, [isLoggedIn, user]);
 
-  // THIS IS THE CORRECTED FUNCTION
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value // Use computed property name to update the correct field
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handlePayment = (e) => {
-      e.preventDefault();
-      console.log("Order Details:", formData);
-      const orderId = `CIN-${Date.now()}`;
-      showNotification(`Order confirmed! Your order number is: ${orderId}`, 'success');
-      clearCart();
-      setTimeout(() => navigate('/store'), 4000);
-  }
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    setIsProcessing(true);
 
-  if (cartItems.length === 0) {
+    try {
+      // Prepare the data payload for the backend
+      const orderPayload = {
+        shippingAddress: formData,
+        cartItems: cartItems.map(item => ({ id: item.id, quantity: item.quantity })),
+      };
+
+      // Send the order to the backend API
+      const response = await api.post('/api/orders', orderPayload);
+
+      showNotification(`Order confirmed! Your order number is: ${response.data.order.orderId}`, 'success');
+      clearCart();
+      
+      // Redirect to the profile page to see the new order
+      setTimeout(() => navigate('/store/profile'), 4000);
+
+    } catch (error) {
+      showNotification(error.response?.data?.msg || 'Failed to place order. Please try again.', 'error');
+      setIsProcessing(false);
+    }
+  };
+
+  // Redirect if cart is empty and an order is not being processed
+  if (cartItems.length === 0 && !isProcessing) {
     navigate('/store');
     return null;
   }
@@ -95,10 +113,10 @@ const CheckoutPage = () => {
             <input type="text" id="pincode" name="pincode" className="form-control" value={formData.pincode} onChange={handleChange} required />
           </div>
 
-          <button type="submit" className="btn-primary pay-button">
-            Pay Now (COD)
+          <button type="submit" className="btn-primary pay-button" disabled={isProcessing}>
+            {isProcessing ? <Spinner /> : `Place Order (COD) - ₹${cartTotal.toLocaleString('en-IN')}`}
           </button>
-          <p className="payment-note">Note: Payment Gateway integration coming soon. Currently supporting Cash on Delivery.</p>
+          <p className="payment-note">Currently supporting Cash on Delivery.</p>
         </form>
       )}
     </div>

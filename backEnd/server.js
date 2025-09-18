@@ -4,6 +4,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const Order = require('./model/Order');
 const connectDB = require('./mongooseConnection');
 const User = require('./model/User');
 const Otp = require('./model/Otp');
@@ -201,6 +202,94 @@ app.post('/reset-password', async (req, res) => {
   } catch (error) {
     res.status(500).json({ msg: 'Server error. Please try again later.' });
   }
+});
+
+app.post('/api/orders', async (req, res) => {
+    try {
+        const { shippingAddress, cartItems } = req.body;
+
+        if (!shippingAddress || !cartItems || cartItems.length === 0) {
+            return res.status(400).json({ msg: 'Missing order data.' });
+        }
+
+        // --- Server-side calculation of total amount for security ---
+        const productIds = cartItems.map(item => item.id);
+        const productDetails = await Product.find({ 'product_id': { $in: productIds } });
+
+        let totalAmount = 0;
+        const orderProducts = cartItems.map(item => {
+            const detail = productDetails.find(p => p.product_id === item.id);
+            if (!detail) throw new Error('Product not found');
+            const itemTotal = detail.discountedprice * item.quantity;
+            totalAmount += itemTotal;
+            return {
+                productId: item.id,
+                quantity: item.quantity,
+                price: detail.discountedprice // Store the price at time of purchase
+            };
+        });
+        // --- End of calculation ---
+
+        const newOrder = new Order({
+            email: shippingAddress.email, // Use email from form data
+            products: orderProducts,
+            totalAmount: totalAmount,
+            shippingAddress: shippingAddress,
+        });
+
+        const savedOrder = await newOrder.save();
+
+        res.status(201).json({ msg: 'Order placed successfully!', order: savedOrder });
+
+    } catch (error) {
+        console.error('Order creation error:', error);
+        res.status(500).json({ msg: 'Server error while placing order.' });
+    }
+});
+
+// FETCH ORDERS FOR THE LOGGED-IN USER
+app.get('/api/orders', authMiddleware, async (req, res) => {
+    try {
+        // 1. Find the user's order documents
+        const orders = await Order.find({ email: req.user.email }).sort({ orderDate: -1 });
+
+        if (!orders || orders.length === 0) {
+            return res.json([]);
+        }
+
+        // 2. Get all product IDs from all orders
+        const allProductIds = orders.flatMap(order => order.products.map(p => p.productId));
+        
+        // 3. Fetch all required product details in a single query
+        const productsDetails = await Product.find({ 'product_id': { $in: allProductIds } });
+        
+        // 4. Create a map for easy lookup
+        const productMap = productsDetails.reduce((acc, product) => {
+            acc[product.product_id] = product;
+            return acc;
+        }, {});
+
+        // 5. Manually populate the product details into each order
+        const populatedOrders = orders.map(order => {
+            const populatedProducts = order.products
+                .map(p => ({
+                    ...p.toObject(),
+                    productId: productMap[p.productId]
+                }))
+                .filter(p => p.productId); // Ensure product exists
+
+            return {
+                ...order.toObject(),
+                products: populatedProducts
+            };
+        });
+
+        res.json(populatedOrders);
+
+    } catch (error) {
+        console.error('Fetch orders error:', error);
+        res.status(500).json({ msg: 'Server error while fetching orders.' });
+    }
 });
 
 
