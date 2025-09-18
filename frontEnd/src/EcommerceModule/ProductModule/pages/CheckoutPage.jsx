@@ -33,25 +33,26 @@ const CheckoutPage = () => {
     }
   }, [isLoggedIn, user]);
 
+  // THIS IS THE CORRECTED FUNCTION
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value // Use computed property name to update the correct field
+    }));
   };
 
   const handlePayment = (e) => {
       e.preventDefault();
       console.log("Order Details:", formData);
-
-      // Simulate payment processing
       const orderId = `CIN-${Date.now()}`;
       showNotification(`Order confirmed! Your order number is: ${orderId}`, 'success');
-
       clearCart();
-      setTimeout(() => navigate('/shop'), 4000); // Redirect after notification is seen
+      setTimeout(() => navigate('/store'), 4000);
   }
 
   if (cartItems.length === 0) {
-    navigate('/shop');
+    navigate('/store');
     return null;
   }
 

@@ -1,9 +1,64 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect, useCallback } from 'react';
+import { useAuth } from './AuthContext';
+import api from '../../api'; // Use the central api instance
+
+const debounce = (func, delay) => {
+  let timeout;
+  return function(...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), delay);
+  };
+};
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const { isLoggedIn } = useAuth();
+
+  const syncCartWithDB = async (itemsToSync) => {
+    if (!isLoggedIn) return;
+    const simplifiedCart = itemsToSync.map(item => ({ productId: item.id, quantity: item.quantity }));
+    try {
+      await api.post('/api/cart/sync', { products: simplifiedCart });
+    } catch (error) {
+      console.error("Failed to sync cart with DB:", error);
+    }
+  };
+
+  const debouncedSync = useCallback(debounce(syncCartWithDB, 1500), [isLoggedIn]);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      if (isLoggedIn) {
+        try {
+          const { data } = await api.get('/api/cart');
+          if (data && data.products) {
+            const fetchedItems = data.products.map(item => ({
+              id: item.productId.product_id,
+              name: item.productId.name,
+              price: item.productId.discountedprice,
+              images: item.productId.images,
+              quantity: item.quantity,
+            }));
+            setCartItems(fetchedItems);
+          }
+        } catch (error) {
+          console.error("Failed to fetch cart:", error);
+        }
+      } else {
+        setCartItems([]);
+      }
+    };
+    fetchCart();
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      debouncedSync(cartItems);
+    }
+  }, [cartItems, debouncedSync, isLoggedIn]);
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
@@ -39,18 +94,17 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-  }
+  };
 
   const cartTotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart, cartTotal }}>
-      {children}
-    </CartContext.Provider>
-  );
+  const value = { cartItems, addToCart, removeFromCart, updateQuantity, clearCart, cartTotal };
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
+// --- THIS IS THE CORRECTED LINE ---
 export const useCart = () => useContext(CartContext);

@@ -118,7 +118,7 @@ const LoginApp = () => {
 
   const handleCloseSuccess = () => {
     setSuccessInfo(null);
-    navigate('/profile'); // Redirect user to their profile after success
+    navigate('/store/profile'); // Redirect user to their profile after success
   };
   
   const handleCloseError = () => setErrorInfo(null);
