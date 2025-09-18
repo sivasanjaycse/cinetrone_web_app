@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const connectDB = require('./mongooseConnection');
 const User = require('./model/User');
 const Otp = require('./model/Otp');
+const Product=require('./model/Product');
 const { sendEmail } = require('./emailService');
 
 // --- 1. INITIAL SETUP ---
@@ -167,6 +168,33 @@ app.post('/reset-password', async (req, res) => {
 /********************************************************************************************** */
 /********************************************************************************************** */
 
+app.get('/api/products', async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ msg: 'Server error while fetching products.' });
+  }
+});
+
+app.get('/api/products', async (req, res) => {
+  // ... (existing code for getting all products)
+});
+
+// NEW: Add this route to get a single product by its ID
+app.get('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findOne({ product_id: req.params.id });
+    if (!product) {
+      return res.status(404).json({ msg: 'Product not found' });
+    }
+    res.status(200).json(product);
+  } catch (error) {
+    console.error('Error fetching single product:', error);
+    res.status(500).json({ msg: 'Server error while fetching product.' });
+  }
+});
 // --- 4. START SERVER ---
 
 const PORT = 3000;

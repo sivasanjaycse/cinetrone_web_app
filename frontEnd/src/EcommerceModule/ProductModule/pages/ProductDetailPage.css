@@ -69,7 +69,7 @@
 }
 /* Add padding to the top of the main container */
 .product-detail-container {
-    padding-top: 60px;
+    padding-top: 40px !important;
     padding-bottom: 60px;
     padding-left: 20px;
     padding-right: 20px;
@@ -171,6 +171,41 @@
 
 /* ... rest of the CSS remains the same ... */
 /* ... */
+/* ... (keep all existing styles) */
+
+.back-button {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--bg-dark);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.price-container {
+    margin-bottom: 30px;
+}
+
+.product-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-right: 15px;
+}
+
+.product-mrp {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
 @media (max-width: 992px) {
     .product-detail-grid {
         grid-template-columns: 1fr;

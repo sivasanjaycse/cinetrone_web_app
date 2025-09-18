@@ -1,28 +1,23 @@
-// src/ProductModule/components/ProductCard.jsx
 import { Link } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 import ImageWithLoader from '../../components/ImageWithLoader/ImageWithLoader';
 
 const ProductCard = ({ product }) => {
-  // New: Logic to handle discounted products
-  const hasDiscount = product.price.discount && product.price.discount < product.price.original;
-  let discountPercent = 0;
-  if (hasDiscount) {
-    discountPercent = Math.round(
-      ((product.price.original - product.price.discount) / product.price.original) * 100
-    );
-  }
-
-  const displayPrice = hasDiscount ? product.price.discount : product.price.original;
+  // NEW: Calculate discount
+  const discountAmount = product.actualprice - product.discountedprice;
+  const discountPercentage = Math.round((discountAmount / product.actualprice) * 100);
 
   return (
-    <Link to={`/store/products/${product.id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/store/products/${product.product_id}`} style={{ textDecoration: 'none' }}>
       <div className={styles.card}>
+        {/* NEW: Discount percentage badge */}
+        {discountPercentage > 0 && (
+          <div className={styles.discountBadge}>
+            {discountPercentage}% OFF
+          </div>
+        )}
+
         <div className={styles.imageWrapper}>
-          {/* New: Display discount badge if applicable */}
-          {hasDiscount && (
-            <div className={styles.discountBadge}>{discountPercent}% OFF</div>
-          )}
           <div className={styles.imageContainerForLoader}>
             <ImageWithLoader
               src={product.images[0]}
@@ -32,17 +27,22 @@ const ProductCard = ({ product }) => {
         </div>
         <div className={styles.content}>
           <h3 className={styles.name}>{product.name}</h3>
-          {/* New: Updated price display */}
-          <div className={styles.priceWrapper}>
-            <span className={styles.currentPrice}>
-              ₹{displayPrice.toLocaleString('en-IN')}
-            </span>
-            {hasDiscount && (
-              <span className={styles.originalPrice}>
-                ₹{product.price.original.toLocaleString('en-IN')}
-              </span>
+          <div className={styles.priceContainer}>
+            <p className={styles.price}>
+              ₹{product.discountedprice.toLocaleString('en-IN')}
+            </p>
+            {/* NEW: Show actual price and discount amount */}
+            {discountAmount > 0 && (
+              <p className={styles.actualPrice}>
+                <del>₹{product.actualprice.toLocaleString('en-IN')}</del>
+              </p>
             )}
           </div>
+          {discountAmount > 0 && (
+            <p className={styles.discountAmount}>
+              Save ₹{discountAmount.toLocaleString('en-IN')}
+            </p>
+          )}
         </div>
       </div>
     </Link>

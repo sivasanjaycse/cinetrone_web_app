@@ -1,36 +1,53 @@
-import { useState, useMemo } from 'react'; // Changed
-import { products } from '../../data/products';
+import { useState, useMemo, useEffect } from 'react';
+import axios from 'axios';
 import ProductCard from '../components/ProductCard';
+import Spinner from '../../components/Spinner/Spinner';
 import './ProductListPage.css';
 import '../ProductModule.css';
 
 const PRODUCTS_PER_PAGE = 20;
 
 const ProductListPage = () => {
+  const [allProducts, setAllProducts] = useState([]);
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
-  const [searchTerm, setSearchTerm] = useState(''); // New: for search input
-  const [sortBy, setSortBy] = useState('default');   // New: for sorting dropdown
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('default');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // New: Memoized calculation for filtered and sorted products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/products');
+        setAllProducts(response.data);
+      } catch (err) {
+        setError('Failed to load products. Please try again later.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   const filteredProducts = useMemo(() => {
-    let searchableProducts = products.filter((product) =>
+    let searchableProducts = allProducts.filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     switch (sortBy) {
       case 'price-asc':
-        searchableProducts.sort((a, b) => a.price - b.price);
+        searchableProducts.sort((a, b) => a.discountedprice - b.discountedprice);
         break;
       case 'price-desc':
-        searchableProducts.sort((a, b) => b.price - a.price);
+        searchableProducts.sort((a, b) => b.discountedprice - a.discountedprice);
         break;
       default:
-        // Keep original order or sort by ID
-        searchableProducts.sort((a, b) => a.id - b.id);
+        searchableProducts.sort((a, b) => a.product_id - b.product_id);
         break;
     }
     return searchableProducts;
-  }, [searchTerm, sortBy]);
+  }, [searchTerm, sortBy, allProducts]);
 
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + PRODUCTS_PER_PAGE);
@@ -38,11 +55,18 @@ const ProductListPage = () => {
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
 
+  if (loading) {
+    return <div className="container product-list-container" style={{ textAlign: 'center', paddingTop: '100px' }}><Spinner /></div>;
+  }
+
+  if (error) {
+    return <div className="container product-list-container"><p className="no-products-found">{error}</p></div>;
+  }
+
   return (
     <div className="container product-list-container">
       <h1 className="page-title">Our Collection</h1>
 
-      {/* New: Filter and Search Controls */}
       <div className="filter-controls">
         <input
           type="text"
@@ -64,12 +88,11 @@ const ProductListPage = () => {
 
       <div className="product-grid">
         {visibleProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.product_id} product={product} />
         ))}
       </div>
       
-      {/* New: Conditional message if no products found */}
-      {filteredProducts.length === 0 && (
+      {filteredProducts.length === 0 && !loading && (
         <p className="no-products-found">No products match your criteria.</p>
       )}
 
