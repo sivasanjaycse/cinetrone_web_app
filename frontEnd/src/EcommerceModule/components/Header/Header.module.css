@@ -122,7 +122,6 @@
 .cartLink {
   position: relative;
 }
-
 @media (max-width: 768px) {
   .nav__menu {
     position: fixed;
