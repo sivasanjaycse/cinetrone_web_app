@@ -22,11 +22,11 @@ const Header = () => {
         </Link>
         <ul className={`${styles.nav__menu} ${isMenuOpen ? styles.active : ""}`} id="nav-menu">
           <li><NavLink to="/" className={styles.nav__link} onClick={closeMenu}>Home</NavLink></li>
-          <li><NavLink to="/shop" className={styles.nav__link} onClick={closeMenu}>Shop</NavLink></li>
+          <li><NavLink to="/store" className={styles.nav__link} onClick={closeMenu}>Shop</NavLink></li>
           {/* Removed "Shop by Category" link */}
-          <li><NavLink to="/profile" className={styles.nav__link} onClick={closeMenu}><FaUserCircle/> My Profile</NavLink></li>
+          <li><NavLink to="/store/profile" className={styles.nav__link} onClick={closeMenu}><FaUserCircle/> My Profile</NavLink></li>
           <li>
-            <NavLink to="/cart" className={`${styles.nav__link} ${styles.cartLink}`} onClick={closeMenu}>
+            <NavLink to="/store/cart" className={`${styles.nav__link} ${styles.cartLink}`} onClick={closeMenu}>
               <FaShoppingCart className={styles.cartIcon} />
               {totalCartItems > 0 && <span className={styles.cartBadge}>{totalCartItems}</span>}
             </NavLink>

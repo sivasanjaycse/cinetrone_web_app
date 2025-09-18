@@ -5,7 +5,7 @@ import backgroundVideo from '../../assets/hero-background.mp4'; // Make sure thi
 
 // Array of button content
 const ctaMessages = [
-  { text: "Visit E-commerce", link: "https://shop.cinetrone.com" },
+  { text: "Explore our Collections", link: "/store" },
   { text: "Book Consultation", link: "/consultation" },
   { text: "Book Calibration", link: "/calibration" },
   {text: "Visit our Channel", link: "https://youtube.com/@cinetrone_hometheatre?si=JpEEhZ7hcbjclFJp"}

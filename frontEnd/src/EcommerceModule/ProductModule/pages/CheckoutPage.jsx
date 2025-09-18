@@ -64,7 +64,7 @@ const CheckoutPage = () => {
           <h2>You are not logged in</h2>
           <p>Login for a faster checkout experience or continue as a guest.</p>
           <div className="prompt-buttons">
-            <button className="btn-primary" onClick={() => navigate('/login')}>Proceed to Login</button>
+            <button className="btn-primary" onClick={() => navigate('/store/login')}>Proceed to Login</button>
             <button className="btn-secondary" onClick={() => setShowLoginForm(false)}>Continue as Guest</button>
           </div>
         </div>

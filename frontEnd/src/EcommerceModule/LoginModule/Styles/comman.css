@@ -13,7 +13,7 @@
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.85)),
-                    url(../../assets/speaker-bg-side.png);
+                    url(../../../assets/speaker-bg-side.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

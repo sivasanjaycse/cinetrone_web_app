@@ -5,7 +5,7 @@ import ImageWithLoader from '../../components/ImageWithLoader/ImageWithLoader';
 
 const ProductCard = ({ product }) => {
   return (
-    <Link to={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/store/products/${product.id}`} style={{ textDecoration: 'none' }}>
       <div className={styles.card}>
         <div className={styles.imageWrapper}>
           {/* New: Wrapped ImageWithLoader in a correctly positioned div */}
