@@ -15,7 +15,6 @@ const shippingAddressSchema = new mongoose.Schema({
 }, { _id: false });
 
 
-// ... (orderProductSchema and shippingAddressSchema remain the same)
 
 const SIX_MONTHS_IN_SECONDS = 6 * 30 * 24 * 60 * 60; // Approx. 15,552,000 seconds
 
