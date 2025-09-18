@@ -5,9 +5,8 @@ import RegisterForm from './RegisterForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import OtpOverlay from './OtpOverlay';
 import SuccessMessage from './SuccessMessage';
-import ErrorOverlay from './ErrorOverlay'; // <-- IMPORT the new ErrorOverlay
+import ErrorOverlay from './ErrorOverlay'; 
 import ResetPasswordForm from "./ResetPasswordForm";
-import CinetroneLogo from "../../assets/logo.png";
 import '../Styles/comman.css';
 import '../Styles/layout.css';
 import '../Styles/LoginVariables.css';
@@ -148,14 +147,6 @@ const AuthContainer = () => {
   return (
     <div className='login-body'>
       <div className="login-app">
-        <header className="login-header">
-          <div className="header__content">
-            <div className="logo">
-              <img className="logoImage" src={CinetroneLogo}/>
-              <h1 className="logo__text">CINETRONE</h1>
-            </div>
-          </div>
-        </header>
         <main className="main">
           <div className="auth-container">
             {renderPage()}

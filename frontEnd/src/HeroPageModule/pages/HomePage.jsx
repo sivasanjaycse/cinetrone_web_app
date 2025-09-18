@@ -25,7 +25,6 @@ const HomePage = () => {
         <ProductGalleryTeaser />
         <QuickLinks />
       </main>
-      <Footer />
     </>
   );
 };

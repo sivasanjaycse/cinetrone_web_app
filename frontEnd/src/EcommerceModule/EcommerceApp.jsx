@@ -12,10 +12,6 @@ import ProductDetailPage from './ProductModule/pages/ProductDetailPage';
 import CartPage from './ProductModule/pages/CartPage';
 import CheckoutPage from './ProductModule/pages/CheckoutPage';
 import ProfilePage from './ProductModule/pages/ProfilePage';
-
-// Other Pages
-// import HeroApp from '../HeroPageModule/HeroApp';
-// import LoginApp from '../LoginModule/JSX/LoginApp';
 import "./ecom.css";
 
 function EcommerceApp() {
@@ -33,7 +29,6 @@ function EcommerceApp() {
                 <Route path="checkout" element={<CheckoutPage />} />
                 <Route path="profile" element={<ProfilePage />} />
                 <Route path="login" element={<ProfilePage/>} />
-                {/* Add other static routes here */}
               </Route>
             </Routes>
           </Router>
