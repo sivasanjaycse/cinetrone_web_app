@@ -14,9 +14,9 @@ const CalibrationForm = () => {
 
   // Define service prices
   const servicePrices = {
-    "basic-calibration": 357,
-    "intermediate-calibration": 799,
-    "advanced-calibration": 1499,
+    "basic-calibration": 5000,
+    "intermediate-calibration": 30000,
+    "advanced-calibration": 50000,
   };
 
   const handleChange = (e) => {
@@ -61,9 +61,9 @@ const CalibrationForm = () => {
         <label htmlFor="service" className={styles.formLabel}>Type of Service Needed</label>
         <select id="service" name="service" className={styles.formSelect} value={formData.service} onChange={handleChange} required>
           <option value="">-- Select a Service --</option>
-          <option value="basic-calibration">Basic Calibration (₹357)</option>
-          <option value="intermediate-calibration">Intermediate Calibration (₹799)</option>
-          <option value="advanced-calibration">Advanced Calibration (₹1499)</option>
+          <option value="basic-calibration">Basic [5.1.2, 5.1]</option>
+          <option value="intermediate-calibration">Intermediate Calibration [5.1.4, 7.1.2, 7.1.4]</option>
+          <option value="advanced-calibration">Advanced Calibration [above 9.1.6]</option>
         </select>
       </div>
 

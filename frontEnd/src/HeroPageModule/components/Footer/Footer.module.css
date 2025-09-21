@@ -11,11 +11,14 @@
   padding: 0 20px;
 }
 
+/* In Footer.module.css */
+
 .footer__content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
   margin-bottom: 32px;
+  align-items: start; /* <-- Add this line */
 }
 
 .footer__title {
@@ -72,4 +75,24 @@
   padding-top: 24px;
   border-top: 1px solid rgba(255, 215, 0, 0.2);
   color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__links li {
+  margin-bottom: 12px;
+}
+
+.footer__links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer__links a:hover {
+  color: #c0a068;
 }

@@ -1,11 +1,11 @@
 const nodemailer = require("nodemailer");
-
+require('dotenv').config();
 // Create a transporter object using Gmail's SMTP service
 const transporter = nodemailer.createTransport({
-  service: "gmail", // Use the built-in GMail service
+  service: "gmail",
   auth: {
     user: "cinetronewebtech@gmail.com",
-    pass: "mlyilbhfyzqfibdf", // Use the App Password you generated
+    pass: process.env.OTP_EMAIL_PWD,
   },
 });
 
@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
  */
 const sendEmail = async (to, subject, text) => {
   const mailData = {
-    from: '"Cinetrone Authenticator" <cinetronewebtech@gmail.com>', // Sender address (must be your Gmail)
+    from: '"Cinetrone Authenticator" <cinetronewebtech@gmail.com>', // Sender address
     to: to, // The recipient's email address
     subject: subject, // The email subject
     text: text, // The email body

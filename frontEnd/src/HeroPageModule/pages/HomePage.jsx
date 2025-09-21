@@ -6,9 +6,7 @@ import Consultation from "../components/Consultation/Consultation";
 import Calibration from "../components/Calibration/Calibration";
 import ProjectsTeaser from "../components/ProjectsTeaser/ProjectsTeaser";
 import Partnership from "../components/Partnership/Partnership";
-import ProductGalleryTeaser from "../components/ProductGalleryTeaser/ProductGalleryTeaser";
-import QuickLinks from "../components/QuickLinks/QuickLinks";
-import Footer from "../components/Footer/Footer";
+import ProductGalleryTeaser from "../components/ProductGalleryTeaser/ProductGalleryTeaser";;
 
 const HomePage = () => {
   return (
@@ -23,7 +21,6 @@ const HomePage = () => {
         <ProjectsTeaser />
         <Partnership />
         <ProductGalleryTeaser />
-        <QuickLinks />
       </main>
     </>
   );

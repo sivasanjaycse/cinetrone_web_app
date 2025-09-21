@@ -15,8 +15,8 @@ const ConsultationForm = ({ serviceType }) => {
   // Define consultation service prices
   const consultationServicePrices = {
     "entry-level": 357, // Example price for Entry level hometheater without acoustic
-    "dolby-atmos": 357, // Example price for Dolby Atmos setup without acoustic
-    "turnkey": 357, // Example price for Turn key home cinema setup
+    "dolby-atmos": 799, // Example price for Dolby Atmos setup without acoustic
+    "turnkey": 1499, // Example price for Turn key home cinema setup
   };
 
   const handleChange = (e) => {
@@ -60,9 +60,9 @@ const ConsultationForm = ({ serviceType }) => {
         <label htmlFor="service" className={styles.formLabel}>Type of Service Needed</label>
         <select id="service" name="service" className={styles.formSelect} value={formData.service} onChange={handleChange} required>
           <option value="">-- Select a Service --</option>
-          <option value="entry-level">Entry level hometheater without acoustic</option>
-          <option value="dolby-atmos">Dolby Atmos setup without acoustic</option>
-          <option value="turnkey">Turn key home cinema setup</option>
+          <option value="entry-level">Entry level hometheater 5.1, 7.1 setup</option>
+          <option value="dolby-atmos">Dolby Atmos 5.1.2 setup</option>
+          <option value="turnkey">Entire Turnkey Project</option>
         </select>
       </div>
 

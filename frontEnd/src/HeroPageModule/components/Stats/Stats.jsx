@@ -1,7 +1,7 @@
 import styles from "./Stats.module.css";
 
 const statsData = [
-  { value: "100+", label: "Successful Installations" },
+  { value: "89+", label: "Successful Installations" },
   { value: "6", label: "Years of R&D" },
   { value: "1.5+", label: "Years Delivering Projects" },
   { value: "1", label: "Unsuccessful Project*" },

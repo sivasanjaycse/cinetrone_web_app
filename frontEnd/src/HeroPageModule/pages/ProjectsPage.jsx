@@ -4,8 +4,8 @@ import Footer from "../components/Footer/Footer";
 import BackButton from "../components/BackButton/BackButton";
 import styles from "./PageStyles.module.css";
 import Project1 from '../assets/project1.PNG';
-import Project2 from '../assets/project2.PNG';
-import Project3 from '../assets/project3.PNG';
+import Project2 from '../assets/project2.jpeg';
+import Project3 from '../assets/project3.jpeg';
 import Project4 from '../assets/project4.PNG';
 import Project5 from '../assets/project5.PNG';
 import Project6 from '../assets/project6.PNG';
@@ -19,7 +19,7 @@ const projects = [
   "Acoustic Treatment - Hyderabad",
   "Virtual Calibration - Avadi Client",
   "Outdoor Cinema + 5.1 Indoor Audio System - Salem Resort (Turnkey project)",
-  "Upcoming: Tiruchi (3 sites) & Bangalore (Dolby Atmos turnkey setups)"
+  "Upcoming: Tiruchi (3 sites) & Bangalore (Dolby Atmos turnkey setups) etc."
 ];
 
 // FIX #1: Use the imported variables directly in the array.

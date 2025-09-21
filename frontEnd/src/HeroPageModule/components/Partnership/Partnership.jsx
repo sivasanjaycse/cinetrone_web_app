@@ -2,7 +2,7 @@
 import styles from "./Partnership.module.css";
 
 // 1. Import your images from the assets folder
-import PartnerLogo from '../../assets/partnerlogo.png';
+import PartnerLogo from '../../assets/partnercert.png';
 import Sponser1 from '../../assets/sponser1.jpeg';
 
 const Partnership = () => {
@@ -19,7 +19,7 @@ const Partnership = () => {
             <div className={styles.imageGrid}>
               <div className={styles.logoContainer}>
                 {/* 2. Use the imported variable for the logo */}
-                <img src={PartnerLogo} alt="Oxykraft Partner Logo" className={styles.logo}/>
+                <img src={PartnerLogo} alt="Oxykraft Partner Certificate" className={styles.logo}/>
               </div>
               <div className={styles.extraImageContainer}>
                  {/* 3. Use the imported variable for the sponsor image */}

@@ -21,7 +21,7 @@ const CareersPage = () => {
           <ul>
             <li><strong>Innovation-Driven:</strong> Work on cutting-edge projects including Dolby Atmos turnkey theatres and AI-powered automation.</li>
             <li><strong>Growth & Learning:</strong> Get hands-on exposure in acoustics, audio engineering, and smart home automation.</li>
-            <li><strong>Impactful Projects:</strong> Be part of over 100 successful installations and upcoming demo theatres across India.</li>
+            <li><strong>Impactful Projects:</strong> Be part of over 89 successful installations and upcoming demo theatres across India.</li>
             <li><strong>Culture of Creativity:</strong> We encourage problem-solving, new thinking, and bold experimentation.</li>
           </ul>
 
@@ -32,6 +32,7 @@ const CareersPage = () => {
             <li>Embedded Systems & Software Development (Cinetrone OS, AI, Automation)</li>
             <li>Sales, Marketing & Customer Experience</li>
             <li>Content Creation & Media</li>
+            <li>No expertise is needed, just a truly interested person with basic knowledge.</li>
           </ul>
 
           <h3>How to Apply</h3>

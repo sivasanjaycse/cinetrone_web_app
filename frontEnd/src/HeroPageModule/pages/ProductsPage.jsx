@@ -11,11 +11,23 @@ import Product3 from '../assets/product3.jpeg';
 import Product4 from '../assets/product4.jpeg';
 import Product5 from '../assets/product5.jpeg';
 import Product6 from '../assets/product6.jpeg';
-
+import NewProduct1 from '../assets/newproduct1.jpeg';
+import NewProduct2 from '../assets/newproduct2.jpeg';
+import NewProduct3 from '../assets/newproduct3.jpeg';
+import NewProduct4 from '../assets/newproduct4.jpeg';
+import NewProduct5 from '../assets/newproduct5.jpeg';
+import NewProduct6 from '../assets/newproduct6.jpeg';
+import NewProduct7 from '../assets/newproduct7.jpeg';
+import NewProduct8 from '../assets/newproduct8.jpeg';
+import NewProduct9 from '../assets/newproduct9.jpeg';
+import NewProduct11 from '../assets/newproduct11.jpeg';
+import NewProduct12 from '../assets/newproduct12.jpeg';
+import NewProduct10 from '../assets/newproduct13.jpeg';
 // 2. Use the imported variables in your productImages array
 const productImages = [
   Product1, Product2, Product3, Product4,
-  Product5, Product6
+  Product5, Product6, NewProduct1, NewProduct2, NewProduct3, NewProduct4, NewProduct5, NewProduct6, NewProduct7,
+  NewProduct12, NewProduct11, NewProduct10, NewProduct9, NewProduct8
 ];
 
 const ProductsPage = () => {
