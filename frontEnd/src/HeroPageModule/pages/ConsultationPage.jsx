@@ -20,6 +20,9 @@ const ConsultationPage = () => {
           <p>
             Whether you're planning a luxury home theatre, outdoor cinema, or advanced AV automation, our experts guide you step by step from concept to execution.Get in touch today and let's turn your dream setup into reality.
           </p>
+          <p>
+             For more details contact: +91 83742 78218 & +91 93609 77893
+          </p>
           <ConsultationForm/>
         </div>
       </div>

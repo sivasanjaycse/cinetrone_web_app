@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 // Define an asynchronous function to connect to the database
 const connectDB = async () => {
   try {
     // Attempt to connect to MongoDB using the URI from environment variables
-    const conn = await mongoose.connect("mongodb+srv://cinetronewebtech:Z4LIIk6RXjq5df6n@cluster0.4mabioh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+    const conn = await mongoose.connect(process.env.MONGODB_URI);
 
     // Log a success message with the host name if the connection is successful
     console.log(`MongoDB Connected: ${conn.connection.host}`);

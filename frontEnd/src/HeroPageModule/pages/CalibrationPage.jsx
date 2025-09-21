@@ -23,7 +23,10 @@ const CalibrationPage = () => {
           </p>
           <h3>Book a Calibration Service</h3>
           <p>
-            Choose from basic, intermediate, or advanced calibration packages. Prices will be updated five days before launch.
+            Choose from basic, intermediate, or advanced calibration packages.
+          </p>
+          <p>
+            For more details contact: +91 83742 78218 & +91 93609 77893
           </p>
           <CalibrationForm/>
         </div>
