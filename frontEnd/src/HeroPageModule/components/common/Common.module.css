@@ -1,0 +1,137 @@
+/* --- Generic Content Section Layout --- */
+.contentLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.contentImage {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.contentText h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+}
+
+.contentText p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--primary-color);
+  color: var(--bg-black);
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+}
+
+.btn:hover {
+  background: var(--primary-hover-color);
+  border-color: var(--primary-hover-color);
+}
+
+@media (max-width: 768px) {
+  .contentLayout {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .imageLeft {
+    order: 1; /* Image appears first */
+  }
+  .contentRight {
+    order: 2;
+  }
+  .imageRight {
+    order: 1; /* Image appears first */
+  }
+  .contentLeft {
+    order: 2;
+  }
+}
+
+/* --- Form Styles --- */
+.form {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #000;
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.formInput,
+.formSelect {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.formInput:focus,
+.formSelect:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.paymentBtn {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+/* --- ADD THESE NEW STYLES FOR THE CENTERED LAYOUT --- */
+
+/*
+  This new layout class uses flexbox to center the content.
+  It will not affect the original .contentLayout grid.
+*/
+.centeredLayout {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/*
+  This new text class styles the centered block.
+*/
+.centeredText {
+  max-width: 700px;
+  text-align: center;
+}
+
+.centeredText p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  font-size: 1.1rem;
+}

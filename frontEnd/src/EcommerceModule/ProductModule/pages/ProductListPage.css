@@ -1,0 +1,78 @@
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.search-bar, .sort-select {
+    padding: 12px 15px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.search-bar {
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.sort-select {
+    cursor: pointer;
+}
+
+.search-bar:focus, .sort-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.no-products-found {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    padding: 40px 0;
+}
+
+
+.show-more-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.product-list-container {
+    padding: 60px 20px;
+}
+
+/* ... .filter-controls, .search-bar, etc. styles remain the same ... */
+
+.product-grid {
+    display: grid;
+    /* Changed: Explicitly set 3 columns for desktop */
+    grid-template-columns: repeat(3, 1fr);
+    /* Changed: Slightly increased gap for larger cards */
+    gap: 50px; 
+}
+
+.show-more-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* New: Media queries for responsive columns */
+@media (max-width: 992px) {
+    .product-grid {
+        /* 2 columns for tablets */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        /* 1 column for mobile */
+        grid-template-columns: 1fr;
+    }
+}

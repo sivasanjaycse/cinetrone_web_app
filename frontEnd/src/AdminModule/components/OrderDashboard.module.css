@@ -1,0 +1,74 @@
+/* === Main Container and Typography === */
+.adMoDashboardContainer {
+    padding: 10px;
+}
+
+.adMoSectionTitle {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.adMoInfoText {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    padding: 40px 0;
+    text-align: center;
+}
+
+/* === Order Table Theme === */
+.adMoOrderTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.adMoOrderTable th,
+.adMoOrderTable td {
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    text-align: left;
+    color: var(--text-light);
+    vertical-align: middle;
+}
+
+.adMoOrderTable th {
+    background-color: rgba(192, 160, 104, 0.05);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.adMoClickableRow {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.adMoClickableRow:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* === Status Dropdown === */
+.adMoStatusDropdown {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.adMoStatusDropdown:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* === Divider === */
+.adMoDivider {
+    margin: 50px 0;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}

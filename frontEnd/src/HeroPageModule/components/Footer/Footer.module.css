@@ -1,0 +1,75 @@
+.footer {
+  background: #1a1a1a;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  padding: 60px 0 30px;
+  margin-top: 60px; /* <-- Add this line */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.footer__title {
+  font-size: 20px;
+  color: #c0a068;
+  margin-bottom: 16px;
+}
+
+.footer__subtitle {
+  font-size: 16px;
+  color: #c0a068;
+  margin-bottom: 16px;
+}
+
+.footer__tagline {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 24px;
+}
+
+.footer__social {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer__social a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer__social a:hover {
+  color: #c0a068;
+}
+
+/* --- ADD THIS RULE FOR THE ICONS --- */
+.footer__social a svg {
+  width: 24px;
+  height: 24px;
+}
+/* ------------------------------------ */
+
+.contactInfo p {
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.contactInfo strong {
+  color: #c0a068;
+}
+
+.footer__bottom {
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+}

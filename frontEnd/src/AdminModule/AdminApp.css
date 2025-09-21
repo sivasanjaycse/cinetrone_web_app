@@ -1,0 +1,168 @@
+/* === General Admin Container === */
+.admin-container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: var(--bg-dark);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.admin-container h1, .admin-container h2 {
+    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+}
+
+/* === Navigation === */
+.admin-nav {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+.admin-nav button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.admin-nav button:hover {
+    background-color: var(--border-color);
+    color: var(--text-light);
+}
+.admin-nav button.active {
+    background-color: var(--primary-color);
+    color: var(--bg-black);
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* === Tables === */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.admin-table th, .admin-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    text-align: left;
+    color: var(--text-light);
+}
+.admin-table th {
+    background-color: rgba(192, 160, 104, 0.05);
+    font-weight: bold;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+.admin-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+.admin-table td button { margin-right: 5px; }
+
+/* === Forms === */
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-muted); }
+input[type="text"], input[type="password"], input[type="number"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--bg-black);
+    color: var(--text-light);
+    transition: border-color 0.3s ease;
+}
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+textarea { min-height: 120px; }
+
+.add-product-form, .edit-product-form {
+    background-color: var(--bg-dark);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+.spec-input-group { display: flex; gap: 10px; margin-bottom: 10px; }
+
+/* === Buttons === */
+.btn-primary { background-color: var(--primary-color); color: var(--bg-black); border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+.btn-secondary { background-color: rgba(255, 255, 255, 0.2); color: var(--text-light); border: none; padding: 8px 12px; cursor: pointer; border-radius: 5px; }
+.btn-danger { background-color: #dc3545; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 5px; }
+
+/* === Modal === */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+}
+.modal-content {
+    background: var(--bg-dark);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+.close-button:hover { color: var(--primary-color); }
+.form-actions { margin-top: 20px; text-align: right; }
+
+.divider {
+    margin: 40px 0;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+/* === Login Page === */
+.admin-login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--bg-black);
+}
+.admin-login-form {
+    padding: 40px;
+    background: var(--bg-dark);
+    box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+.error-message { color: #dc3545; margin-top: 10px; }
+
+/* ... (keep all existing styles) */
+
+.clickable-row {
+    cursor: pointer;
+}
+
+.clickable-row:hover {
+    background-color: hsl(0, 0%, 0%) !important;
+}

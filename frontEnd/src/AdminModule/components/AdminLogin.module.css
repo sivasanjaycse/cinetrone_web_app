@@ -1,0 +1,84 @@
+/* === Main Login Container === */
+.adminLoginContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--bg-black);
+}
+
+.adminLoginForm {
+    padding: 40px;
+    background: var(--bg-dark);
+    box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* === Typography === */
+.adminLoginForm h2 {
+    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+/* === Form Styles === */
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-muted);
+}
+
+.adminLoginForm input[type="text"],
+.adminLoginForm input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--bg-black);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.adminLoginForm input[type="text"]:focus,
+.adminLoginForm input[type="password"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.errorMessage {
+    color: #dc3545;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* === Button Styles === */
+.btnPrimary {
+    background-color: var(--primary-color);
+    color: var(--bg-black);
+    border: none;
+    padding: 12px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btnPrimary:hover {
+    background-color: var(--primary-hover-color);
+}

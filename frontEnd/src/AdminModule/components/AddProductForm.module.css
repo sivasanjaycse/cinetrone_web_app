@@ -1,0 +1,106 @@
+
+.formTitle {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.subheading {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.addProductForm {
+    background-color: var(--bg-dark);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.imageInputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.addProductForm input,
+.addProductForm textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--bg-black);
+    color: var(--text-light);
+    transition: border-color 0.3s ease;
+}
+
+.addProductForm input:focus,
+.addProductForm textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.addProductForm textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.specInputGroup {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.formActions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Button Styles (re-used from admin theme) */
+.btnPrimary { 
+    background-color: var(--primary-color); 
+    color: var(--bg-black); 
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.btnSecondary { 
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: var(--text-light); 
+    border: none; 
+    padding: 8px 15px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}

@@ -1,0 +1,174 @@
+/* === Overlay and Modal Container === */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 600px;
+    padding: 32px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideInUp 0.4s ease;
+}
+
+.closeButton {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+    color: var(--primary-color);
+}
+
+/* === Typography and Sections === */
+.modal h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+}
+
+.section {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.section p {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.section p strong {
+    color: var(--text-light);
+    margin-right: 8px;
+}
+
+/* === Status Badges === */
+.status {
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--bg-black);
+    text-transform: capitalize;
+}
+
+.delivered {
+    background-color: #2ed573; /* Green */
+}
+
+.shipped {
+    background-color: #1e90ff; /* Blue */
+}
+
+.processing {
+    background-color: #ffa502; /* Orange */
+}
+
+.cancelled {
+    background-color: #ff4757; /* Red */
+    color: var(--text-light);
+}
+
+/* === Item List === */
+.itemList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.itemInfo {
+    flex-grow: 1;
+}
+
+.itemName {
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.itemQty {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.itemPrice {
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+
+/* === Animations === */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
