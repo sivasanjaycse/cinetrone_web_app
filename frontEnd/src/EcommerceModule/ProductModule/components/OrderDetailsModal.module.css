@@ -91,6 +91,7 @@
     font-weight: 700;
     color: var(--bg-black);
     text-transform: capitalize;
+    background-color: #2ed573;
 }
 
 .delivered {

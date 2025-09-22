@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Stats.module.css";
 
 const statsData = [
@@ -11,12 +12,24 @@ const Stats = () => {
   return (
     <section className={`section ${styles.stats}`}>
       <div className={`container ${styles.statsContainer}`}>
-        {statsData.map((stat, index) => (
-          <div key={index} className={styles.statItem}>
-            <span className={styles.statValue}>{stat.value}</span>
-            <span className={styles.statLabel}>{stat.label}</span>
-          </div>
-        ))}
+        {statsData.map((stat, index) => {
+          // Conditionally render a Link for the specific item
+          if (stat.label === "Unsuccessful Project*") {
+            return (
+              <Link key={index} to="/learning-from-challenges" className={`${styles.statItem} ${styles.clickable}`}>
+                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statLabel}>{stat.label}</span>
+              </Link>
+            );
+          } else {
+            return (
+              <div key={index} className={styles.statItem}>
+                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statLabel}>{stat.label}</span>
+              </div>
+            );
+          }
+        })}
       </div>
       <p className={styles.disclaimer}>
         *We believe in transparency. One early project didn't meet our high standards, and we learned invaluable lessons from it.

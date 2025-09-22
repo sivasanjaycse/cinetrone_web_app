@@ -23,7 +23,7 @@ const ErrorOverlay = ({ title, text, onClose }) => {
     borderRadius: '12px',
     padding: '32px',
     textAlign: 'center',
-    border: '2px solid #000000ff', // Using error color for the border
+    border: '2px solid #dc3545', // Using a standard error color for the border
     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
     maxWidth: '400px',
     width: '90%'
@@ -31,21 +31,26 @@ const ErrorOverlay = ({ title, text, onClose }) => {
 
   const iconStyles = {
     fontSize: '48px',
-    color: '#c0a068', // Gold theme for the cross symbol
+    color: '#dc3545', // Using error color for the cross symbol
     marginBottom: '16px',
     display: 'block'
   };
 
   const titleStyles = {
-    color: '#c0a068',
+    color: '#c0a068', // Kept gold for consistency with the overall theme
     marginBottom: '8px',
     fontSize: '20px'
   };
 
   const textStyles = {
-    color: '#666666',
-    marginBottom: '24px',
+    color: '#a9a9a9', // Lighter grey for better readability on a dark background
     margin: '0 0 24px 0'
+  };
+
+  // New: Inline style for the button's wrapper to center it
+  const buttonWrapperStyles = {
+    display: 'flex',
+    justifyContent: 'center',
   };
 
   const errorJSX = (
@@ -54,7 +59,10 @@ const ErrorOverlay = ({ title, text, onClose }) => {
         <div style={iconStyles}>✕</div>
         <h3 style={titleStyles}>{title}</h3>
         <p style={textStyles}>{text}</p>
-        <button className="login-btn login-btn--primary" onClick={onClose}>Close</button>
+        {/* New: Added a wrapper div with the centering style */}
+        <div style={buttonWrapperStyles}>
+            <button className="login-btn login-btn--primary" onClick={onClose}>Close</button>
+        </div>
       </div>
     </div>
   );

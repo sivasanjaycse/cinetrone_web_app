@@ -62,9 +62,9 @@
 
 .lightboxImage {
     display: block;
-    /* THIS IS THE FIX: Constrain the image directly to the viewport size */
-    max-width: 90vw;
-    max-height: 90vh;
+    /* Changed: Constrain the image to 70% of the viewport size */
+    max-width: 70vw;
+    max-height: 70vh;
     border: 2px solid var(--border-color);
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);

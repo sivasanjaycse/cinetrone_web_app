@@ -1,53 +1,64 @@
+/* === Main Section === */
 .stats {
-  background-color: var(--bg-dark);
-  text-align: center;
+    background-color: var(--bg-dark);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
 }
 
+/* === Grid Container (Uses your responsive auto-fit) === */
 .statsContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
 }
 
-
+/* === Stat Item Box (New "Gold Box" Design) === */
 .statItem {
-  display: flex;
-  flex-direction: column;
-  padding: 30px 20px; /* Increased padding for better spacing */
-  
-  /* --- START: Added styles for the gold box --- */
-  background: linear-gradient(145deg, rgba(192, 160, 104, 0.1), rgba(192, 160, 104, 0.05)); /* Subtle gold gradient */
-  border: 1px solid rgba(192, 160, 104, 0.2); /* Soft gold border */
-  border-radius: 12px; /* Rounded corners for an elegant look */
-  transition: all 0.3s ease-in-out; /* Smooth transition for hover */
-  /* --- END: Added styles for the gold box --- */
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    background: linear-gradient(145deg, rgba(192, 160, 104, 0.1), rgba(192, 160, 104, 0.05));
+    border: 1px solid rgba(192, 160, 104, 0.2);
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none; /* Retained: Ensures link has no underline */
 }
 
-/* --- ADD THIS NEW HOVER EFFECT --- */
 .statItem:hover {
-  transform: translateY(-5px); /* Lifts the box up on hover */
-  border-color: rgba(192, 160, 104, 0.5); /* Makes the border more prominent */
-  background: linear-gradient(145deg, rgba(192, 160, 104, 0.15), rgba(192, 160, 104, 0.08));
+    transform: translateY(-5px);
+    border-color: rgba(192, 160, 104, 0.5);
+    background: linear-gradient(145deg, rgba(192, 160, 104, 0.15), rgba(192, 160, 104, 0.08));
 }
 
+/* Retained: Class for the clickable item to add pointer */
+.clickable {
+    cursor: pointer;
+}
+
+/* === Text Styles === */
 .statValue {
-  font-family: "Playfair Display", serif;
-  font-size: 3.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  line-height: 1.1;
+    display: block; /* Retained: Good for structure */
+    font-family: "Playfair Display", serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.1;
+    margin-bottom: 8px; /* Retained: Good for spacing */
 }
 
 .statLabel {
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin-top: 8px;
+    display: block; /* Retained: Good for structure */
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-top: 8px;
 }
 
+/* === Disclaimer === */
 .disclaimer {
-  max-width: 600px;
-  margin: 40px auto 0;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-style: italic;
+    max-width: 600px;
+    margin: 40px auto 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
 }

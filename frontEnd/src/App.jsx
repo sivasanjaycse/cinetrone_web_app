@@ -11,7 +11,7 @@ import TermsPage from "./HeroPageModule/pages/TermsPage";
 import CareersPage from "./HeroPageModule/pages/CareersPage";
 import ScrollToTop from "./HeroPageModule/components/common/ScrollToTop";
 import "./HeroPageModule/HeroStyles.css"
-
+import FloatingWhatsApp from "./FloatingWhatsapp";
 // --- E-commerce Module Imports ---
 import EcommerceLayout from './EcommerceLayout'; // The new provider wrapper
 import ProductListPage from "./EcommerceModule/ProductModule/pages/ProductListPage";
@@ -23,17 +23,19 @@ import LoginApp from './EcommerceModule/LoginModule/JSX/LoginApp';
 import Footer from "./HeroPageModule/components/Footer/Footer";
 import AdminApp from "./AdminModule/Adminapp";
 import "./EcommerceModule/ecom.css"; // E-commerce specific styles
-
+import FailedProjectsPage from "./HeroPageModule/pages/FailedProjectsPage";
 function App() {
   return (
     <>
     <Router>
       <ScrollToTop />
+      <FloatingWhatsApp/>
       <Routes>
         {/* === MAIN WEBSITE ROUTES === */}
         {/* These routes do NOT have the e-commerce contexts */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/learning-from-challenges" element={<FailedProjectsPage />} />
         <Route path="/consultation" element={<ConsultationPage />} />
         <Route path="/calibration" element={<CalibrationPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
