@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Product = require('./model/Product');
 const Order = require('./model/Order');
-
+const DisplayProduct = require('./model/DisplayProduct');
 // --- Admin Login ---
 router.post('/admin/login', (req, res) => {
     const { username, password } = req.body;
@@ -138,6 +138,65 @@ router.put('/admin/orders/:orderId/status', async (req, res) => {
         res.json(updatedOrder);
     } catch (error) {
         res.status(500).json({ msg: 'Error updating order status.' });
+    }
+});
+
+// --- NEW: Gallery Management ---
+// 2. Add the new routes here without authMiddleware for consistency.
+
+// GET all display product images (for the public gallery)
+router.get('/display-products', async (req, res) => {
+  try {
+    const products = await DisplayProduct.find({}).sort({ createdAt: -1 });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ msg: 'Server error while fetching display products.' });
+  }
+});
+
+// ADMIN: Add a new display product image
+router.post('/display-products', async (req, res) => {
+  const { url } = req.body;
+  if (!url) {
+    return res.status(400).json({ msg: 'Image URL is required.' });
+  }
+  try {
+    const newDisplayProduct = new DisplayProduct({ url });
+    await newDisplayProduct.save();
+    res.status(201).json({ msg: 'Image added successfully!', product: newDisplayProduct });
+  } catch (error) {
+    res.status(500).json({ msg: 'Server error while adding image.' });
+  }
+});
+
+// ADMIN: Delete a display product image
+router.delete('/display-products/:id', async (req, res) => {
+  try {
+    const product = await DisplayProduct.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ msg: 'Image not found.' });
+    }
+    await product.deleteOne();
+    res.status(200).json({ msg: 'Image deleted successfully.' });
+  } catch (error) {
+    res.status(500).json({ msg: 'Server error while deleting image.' });
+  }
+});
+
+router.put('/admin/products/:id/stock', async (req, res) => {
+    try {
+        const product = await Product.findOne({ product_id: req.params.id });
+        if (!product) {
+            return res.status(404).json({ msg: 'Product not found.' });
+        }
+        
+        // Toggle the outOfStock status
+        product.outOfStock = !product.outOfStock;
+        await product.save();
+        
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ msg: 'Error updating stock status.' });
     }
 });
 

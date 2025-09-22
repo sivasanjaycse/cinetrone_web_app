@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // MODIFIED: Import useNavigate
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../../context/CartContext';
 import { useNotification } from '../../context/NotificationContext';
@@ -10,7 +10,7 @@ import '../ProductModule.css';
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
-  const navigate = useNavigate(); // NEW: Initialize the navigate hook
+  const navigate = useNavigate();
   const { addToCart } = useCart();
   const { showNotification } = useNotification();
   
@@ -33,29 +33,28 @@ const ProductDetailPage = () => {
     fetchProduct();
   }, [productId]);
 
-  if (loading) {
-    return <div className="container product-detail-container" style={{ textAlign: 'center', paddingTop: '100px' }}><Spinner /></div>;
-  }
-  
-  if (error || !product) {
-    return <div className="container product-detail-container"><h2 className="page-title">{error || 'Product not found.'}</h2></div>;
-  }
-
   const handleAddToCart = () => {
     const productForCart = {
         id: product.product_id,
         name: product.name,
         price: product.discountedprice,
         images: product.images,
-        brand: product.brand || 'Cinetrone'
+        brand: 'Cinetrone'
     };
     addToCart(productForCart);
     showNotification(`${product.name} added to cart!`, 'success');
   }
 
+  if (loading) {
+    return <div className="container" style={{ textAlign: 'center', paddingTop: '100px' }}><Spinner /></div>;
+  }
+  
+  if (error || !product) {
+    return <div className="container"><h2 className="page-title">{error || 'Product not found.'}</h2></div>;
+  }
+
   return (
     <div className="container product-detail-container">
-      {/* NEW: Back button */}
       <button onClick={() => navigate(-1)} className="back-button">← Go Back</button>
 
       <div className="product-detail-grid">
@@ -64,12 +63,26 @@ const ProductDetailPage = () => {
         </div>
         <div className="product-info">
           <h1 className="product-name">{product.name}</h1>
+          
+          {/* Stock Status Display */}
+          <p className={product.outOfStock ? 'status-oos-text' : 'status-instock-text'}>
+              {product.outOfStock ? 'Currently Unavailable' : 'In Stock'}
+          </p>
+
           <p className="product-description">{product.product_description}</p>
           <div className="price-container">
             <span className="product-price">₹{product.discountedprice.toLocaleString('en-IN')}</span>
             <span className="product-mrp">M.R.P.: <del>₹{product.actualprice.toLocaleString('en-IN')}</del></span>
           </div>
-          <button onClick={handleAddToCart} className="btn-primary">Add to Cart</button>
+          
+          {/* Add to Cart button is disabled based on stock status */}
+          <button 
+              onClick={handleAddToCart} 
+              className="btn-primary"
+              disabled={product.outOfStock}
+          >
+              {product.outOfStock ? 'Out of Stock' : 'Add to Cart'}
+          </button>
         </div>
       </div>
       <div className="product-specs">

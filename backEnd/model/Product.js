@@ -2,18 +2,21 @@ const mongoose = require('mongoose');
 const Counter = require('./Counter'); // Import the new Counter model
 
 const ProductSchema = new mongoose.Schema({
-    // MODIFIED: Changed type to Number. It's no longer required in the request body.
     product_id: { type: Number, unique: true },
     name: { type: String, required: true },
     actualprice: { type: Number, required: true },
     discountedprice: { type: Number, required: true },
-    product_spec: [{
-        key: String,
-        value: String
-    }],
+    product_spec: [{ key: String, value: String }],
     product_description: { type: String, required: true },
-    images: [{ type: String, required: true }]
+    images: [{ type: String, required: true }],
+    // NEW FIELD
+    outOfStock: {
+        type: Boolean,
+        default: false
+    }
 });
+
+
 
 // NEW: Add a pre-save hook to auto-increment the product_id
 ProductSchema.pre('save', async function(next) {

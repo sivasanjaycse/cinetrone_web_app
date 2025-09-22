@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import api from '../../api';
 import AddProductForm from './AddProductForm';
 import EditProductModal from './EditProductModal';
+import styles from './ProductDashboard.module.css'; // Import the new theme
 
 const ProductDashboard = () => {
     const [products, setProducts] = useState([]);
@@ -40,18 +41,27 @@ const ProductDashboard = () => {
         fetchProducts(); // Refresh the list
     };
 
+    const handleToggleStock = async (productId) => {
+        try {
+            await api.put(`/api/admin/products/${productId}/stock`);
+            fetchProducts(); // Refresh the list to show the new status
+        } catch (err) {
+            alert('Failed to update stock status.');
+        }
+    };
+
     return (
-        <div>
+        <div className={styles.productDashboardContainer}>
             <AddProductForm onProductAdded={fetchProducts} />
-            <hr className="divider" />
-            <h2>Existing Products</h2>
-            {loading ? <p>Loading products...</p> : (
-                <table className="admin-table">
+            <hr className={styles.divider} />
+            <h2 className={styles.sectionTitle}>Existing Products</h2>
+            {loading ? <p className={styles.infoText}>Loading products...</p> : (
+                <table className={styles.productTable}>
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Price</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -60,10 +70,17 @@ const ProductDashboard = () => {
                             <tr key={p.product_id}>
                                 <td>{p.product_id}</td>
                                 <td>{p.name}</td>
-                                <td>₹{p.discountedprice.toLocaleString()}</td>
                                 <td>
-                                    <button className="btn-secondary" onClick={() => handleEdit(p)}>Edit</button>
-                                    <button className="btn-danger" onClick={() => handleDelete(p.product_id)}>Delete</button>
+                                    <span className={`${styles.statusBadge} ${p.outOfStock ? styles.statusOos : styles.statusInstock}`}>
+                                        {p.outOfStock ? 'Out of Stock' : 'In Stock'}
+                                    </span>
+                                </td>
+                                <td className={styles.actionButtons}>
+                                    <button className={styles.btnSecondary} onClick={() => handleToggleStock(p.product_id)}>
+                                        Toggle Stock
+                                    </button>
+                                    <button className={styles.btnSecondary} onClick={() => handleEdit(p)}>Edit</button>
+                                    <button className={styles.btnDanger} onClick={() => handleDelete(p.product_id)}>Delete</button>
                                 </td>
                             </tr>
                         ))}

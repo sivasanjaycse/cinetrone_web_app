@@ -1,0 +1,92 @@
+.sectionTitle {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.infoText {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    padding: 40px 0;
+    text-align: center;
+}
+
+/* === Product Table === */
+.productTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.productTable th,
+.productTable td {
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    text-align: left;
+    color: var(--text-light);
+    vertical-align: middle;
+}
+
+.productTable th {
+    background-color: rgba(192, 160, 104, 0.05);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.productTable tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* === Status Badges === */
+.statusBadge {
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.statusInstock {
+    background-color: #2ed573; /* Green */
+    color: var(--bg-black);
+}
+
+.statusOos {
+    background-color: #6c757d; /* Muted Grey */
+    color: var(--text-light);
+}
+
+/* === Action Buttons === */
+.actionButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.btnSecondary { 
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: var(--text-light); 
+    border: none; 
+    padding: 8px 12px; 
+    cursor: pointer; 
+    border-radius: 5px;
+    white-space: nowrap; /* Prevents button text from wrapping */
+}
+
+.btnDanger { 
+    background-color: #dc3545; 
+    color: white; 
+    border: none; 
+    padding: 8px 12px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+
+/* === Divider === */
+.divider {
+    margin: 50px 0;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}

@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const DisplayProduct = require('./model/DisplayProduct');
 const Order = require('./model/Order');
 const connectDB = require('./mongooseConnection');
 const User = require('./model/User');

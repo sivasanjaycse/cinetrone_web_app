@@ -166,3 +166,8 @@ textarea { min-height: 120px; }
 .clickable-row:hover {
     background-color: hsl(0, 0%, 0%) !important;
 }
+
+/* ... (existing styles) */
+.status-instock { color: green; font-weight: bold; }
+.status-oos { color: red; font-weight: bold; }
+.action-buttons button { margin-right: 5px; }

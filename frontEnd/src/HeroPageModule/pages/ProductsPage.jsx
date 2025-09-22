@@ -1,57 +1,74 @@
-// src/pages/ProductsPage.jsx
+import { useState, useEffect } from 'react';
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 import BackButton from "../components/BackButton/BackButton";
 import styles from "./PageStyles.module.css";
-
-// 1. Import all 8 product images from your assets folder
-import Product1 from '../assets/product1.jpeg';
-import Product2 from '../assets/product2.jpeg';
-import Product3 from '../assets/product3.jpeg';
-import Product4 from '../assets/product4.jpeg';
-import Product5 from '../assets/product5.jpeg';
-import Product6 from '../assets/product6.jpeg';
-import NewProduct1 from '../assets/newproduct1.jpeg';
-import NewProduct2 from '../assets/newproduct2.jpeg';
-import NewProduct3 from '../assets/newproduct3.jpeg';
-import NewProduct4 from '../assets/newproduct4.jpeg';
-import NewProduct5 from '../assets/newproduct5.jpeg';
-import NewProduct6 from '../assets/newproduct6.jpeg';
-import NewProduct7 from '../assets/newproduct7.jpeg';
-import NewProduct8 from '../assets/newproduct8.jpeg';
-import NewProduct9 from '../assets/newproduct9.jpeg';
-import NewProduct11 from '../assets/newproduct11.jpeg';
-import NewProduct12 from '../assets/newproduct12.jpeg';
-import NewProduct10 from '../assets/newproduct13.jpeg';
-// 2. Use the imported variables in your productImages array
-const productImages = [
-  Product1, Product2, Product3, Product4,
-  Product5, Product6, NewProduct1, NewProduct2, NewProduct3, NewProduct4, NewProduct5, NewProduct6, NewProduct7,
-  NewProduct12, NewProduct11, NewProduct10, NewProduct9, NewProduct8
-];
+import api from "../../api"; // Your configured axios instance
 
 const ProductsPage = () => {
-  return (
-    <>
-      <Header />
-      <BackButton />
-      {/* 3. Use an imported variable for the header background */}
-      <header className="pageHeader">
-        <h1 className="pageTitle">Product Gallery</h1>
-      </header>
-      <div className="pageContent">
-        <div className="container">
-          <p>Explore a selection of the high-performance equipment and elegant finishing materials we use in our turnkey projects.</p>
-          <div className={styles.galleryGrid}>
-            {productImages.map((src, index) => (
-              <div key={index} className={styles.galleryItem}>
-                <img src={src} alt={`Product example ${index + 1}`} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
-  );
+    const [images, setImages] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    // NEW: State to manage the selected image for the lightbox
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const response = await api.get('/api/display-products');
+                setImages(response.data);
+            } catch (err) {
+                setError('Failed to load images. Please try again later.');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchImages();
+    }, []);
+
+    return (
+        <>
+            <Header />
+            <BackButton />
+            <header className="pageHeader">
+                <h1 className="pageTitle">Product Gallery</h1>
+            </header>
+            <div className="pageContent">
+                <div className="container">
+                    <p>Explore a selection of the high-performance equipment and elegant finishing materials we use in our turnkey projects.</p>
+                    
+                    {loading && <p>Loading images...</p>}
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    
+                    {!loading && !error && (
+                        <div className={styles.galleryGrid}>
+                            {images.map((image) => (
+                                // NEW: Added onClick to open the lightbox
+                                <div 
+                                    key={image._id} 
+                                    className={styles.galleryItem} 
+                                    onClick={() => setSelectedImage(image.url)}
+                                >
+                                    <img src={image.url} alt={`Product example`} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* NEW: Lightbox JSX, rendered conditionally */}
+            {selectedImage && (
+                <div className={styles.lightboxOverlay} onClick={() => setSelectedImage(null)}>
+                    <div className={styles.lightboxContent}>
+                        <span className={styles.closeButton}>&times;</span>
+                        <img src={selectedImage} alt="Enlarged product view" className={styles.lightboxImage} />
+                    </div>
+                </div>
+            )}
+        </>
+    );
 };
+
 export default ProductsPage;

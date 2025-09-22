@@ -3,18 +3,22 @@ import styles from './ProductCard.module.css';
 import ImageWithLoader from '../../components/ImageWithLoader/ImageWithLoader';
 
 const ProductCard = ({ product }) => {
-  // NEW: Calculate discount
   const discountAmount = product.actualprice - product.discountedprice;
   const discountPercentage = Math.round((discountAmount / product.actualprice) * 100);
 
   return (
     <Link to={`/store/products/${product.product_id}`} style={{ textDecoration: 'none' }}>
       <div className={styles.card}>
-        {/* NEW: Discount percentage badge */}
-        {discountPercentage > 0 && (
+        {/* Discount percentage badge */}
+        {discountPercentage > 0 && !product.outOfStock && (
           <div className={styles.discountBadge}>
             {discountPercentage}% OFF
           </div>
+        )}
+
+        {/* Out of Stock Badge */}
+        {product.outOfStock && (
+          <div className={styles.stockBadge}>Out of Stock</div>
         )}
 
         <div className={styles.imageWrapper}>
@@ -31,7 +35,6 @@ const ProductCard = ({ product }) => {
             <p className={styles.price}>
               ₹{product.discountedprice.toLocaleString('en-IN')}
             </p>
-            {/* NEW: Show actual price and discount amount */}
             {discountAmount > 0 && (
               <p className={styles.actualPrice}>
                 <del>₹{product.actualprice.toLocaleString('en-IN')}</del>

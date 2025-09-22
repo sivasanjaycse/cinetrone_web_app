@@ -1,64 +1,126 @@
+/* === Section Layout === */
 .partnershipGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
 }
+
 .content h3 {
-  font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 16px;
 }
+
 .content p {
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 24px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 500px;
+    margin-bottom: 30px;
 }
 
-/* START: New styles for the image grid */
+/* === Image Grid & Video === */
 .imageGrid {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-.logo {
-  max-width: 200px;
-
+.logoContainer, .extraImageContainer {
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-.extraImage {
-  width: 100%;
-  border-radius: 8px;
-  transition: filter 0.3s ease-in-out;
+.logoContainer:hover, .extraImageContainer:hover {
+    transform: scale(1.05);
 }
 
+.logo, .extraImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
 .videoWrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
+    width: 100%;
+    /* Changed: Updated to a standard 16:9 widescreen aspect ratio */
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
 }
+
 .videoWrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
+
+
+/* === Lightbox Styles (Copied for this component) === */
+.lightboxOverlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.lightboxContent {
+    position: relative;
+    /* This container can be simplified as constraints are now on the image */
+}
+
+.lightboxImage {
+    display: block;
+    /* Changed: Constraints are now directly on the image to ensure it fits the screen */
+    max-width: 90vw;
+    max-height: 90vh;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: zoomIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.closeButton {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    color: var(--text-light);
+    font-size: 2.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.closeButton:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+
+/* === Animations === */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* === Responsive Layout === */
 @media (max-width: 768px) {
-  .partnershipGrid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  /* Make the image grid stack on mobile */
-  .imageGrid {
-    grid-template-columns: 1fr;
-  }
+    .partnershipGrid {
+        grid-template-columns: 1fr;
+    }
 }
