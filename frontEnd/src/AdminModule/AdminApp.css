@@ -171,3 +171,31 @@ textarea { min-height: 120px; }
 .status-instock { color: green; font-weight: bold; }
 .status-oos { color: red; font-weight: bold; }
 .action-buttons button { margin-right: 5px; }
+
+/* === Responsive Styles for Mobile === */
+@media (max-width: 768px) {
+    /* Adjust main container padding for smaller screens */
+    .admin-container {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    /* Make heading smaller and centered on mobile */
+    .admin-container h1, 
+    .admin-container h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    /* Stack the top navigation buttons vertically */
+    .admin-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Creates space between stacked buttons */
+    }
+
+    .admin-nav button {
+        width: 100%; /* Make each button full-width */
+        margin-right: 0; /* Remove the horizontal margin */
+    }
+}
