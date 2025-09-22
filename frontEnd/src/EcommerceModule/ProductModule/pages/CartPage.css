@@ -1,9 +1,6 @@
+/* === Desktop Styles === */
 .cart-container {
     padding: 60px 20px;
-}
-
-.empty-cart {
-    text-align: center;
 }
 
 .cart-layout {
@@ -67,20 +64,23 @@
     font-size: 0.9rem;
 }
 
-.item-quantity {
+.quantity-controls {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.item-quantity button {
+.quantity-controls button {
     background: none;
     border: 1px solid var(--border-color);
     color: var(--primary-color);
     cursor: pointer;
     width: 30px;
     height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.item-quantity input {
+.quantity-controls input {
     width: 40px;
     text-align: center;
     background: none;
@@ -104,7 +104,7 @@
     color: var(--primary-color);
 }
 
-/* Cart Summary */
+/* === Cart Summary === */
 .cart-summary {
     background: var(--bg-dark);
     padding: 30px;
@@ -125,9 +125,6 @@
     margin-bottom: 15px;
     color: var(--text-muted);
 }
-.summary-row.discount {
-    color: #28a745; /* A success color for discount */
-}
 .summary-total {
     display: flex;
     justify-content: space-between;
@@ -138,16 +135,13 @@
     padding-top: 20px;
     border-top: 1px solid var(--border-color);
 }
-
 .checkout-btn {
     width: 100%;
     text-align: center;
     margin-top: 20px;
 }
 
-/* ... Keep all existing styles for the non-empty cart ... */
-
-/* Updated styles for the empty cart container */
+/* === Empty Cart Styles === */
 .empty-cart {
     display: flex;
     flex-direction: column;
@@ -156,8 +150,6 @@
     text-align: center;
     min-height: calc(100vh - 250px);
 }
-
-/* New: Style for the large, stylized title */
 .empty-cart-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
@@ -166,8 +158,6 @@
     font-weight: 700;
     text-shadow: 0 0 10px rgba(192, 160, 104, 0.3);
 }
-
-/* New: Style for the descriptive message */
 .empty-cart-message {
     color: var(--text-muted);
     font-size: 1.1rem;
@@ -175,8 +165,6 @@
     max-width: 500px;
     line-height: 1.6;
 }
-
-/* New: Style for the prominent button */
 .empty-cart-button {
     background-color: var(--primary-color);
     color: var(--bg-black);
@@ -189,13 +177,13 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 4px;
-    text-decoration: none; /* Ensures the Link tag looks like a button */
+    text-decoration: none;
 }
-
 .empty-cart-button:hover {
     background-color: var(--primary-hover-color);
 }
 
+/* === Responsive Layout === */
 @media (max-width: 992px) {
     .cart-layout {
         grid-template-columns: 1fr;
@@ -206,22 +194,64 @@
     .cart-header {
         display: none;
     }
+
     .cart-item {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        text-align: center;
+        display: block;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
     }
-     .item-desc {
+    .cart-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .item-desc {
         flex-direction: column;
         text-align: center;
-     }
-    .item-quantity, .item-price, .item-total, .item-remove {
-        justify-content: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
     }
-    .item-price::before, .item-total::before {
+    
+    .item-quantity,
+    .item-price,
+    .item-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        text-align: right;
+        border-bottom: none;
+    }
+
+    .item-quantity::before,
+    .item-price::before,
+    .item-total::before {
         content: attr(data-label);
         font-weight: bold;
-        margin-right: 10px;
         color: var(--primary-color);
+        text-align: left;
+    }
+    
+    .quantity-controls button {
+        width: 25px;
+        height: 25px;
+        padding: 0;
+        font-size: 0.8rem;
+    }
+    .quantity-controls input {
+        width: 35px !important;
+        height: 25px;
+        font-size: 0.9rem;
+    }
+
+    .item-remove {
+        display: block;
+        width: fit-content;
+        margin: 15px auto 0 auto;
+        padding: 8px 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
     }
 }

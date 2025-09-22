@@ -84,7 +84,6 @@ const CheckoutPage = () => {
           <p>Login for a faster checkout experience or continue as a guest.</p>
           <div className="prompt-buttons">
             <button className="btn-primary" onClick={() => navigate('/store/login')}>Proceed to Login</button>
-            <button className="btn-secondary" onClick={() => setShowLoginForm(false)}>Continue as Guest</button>
           </div>
         </div>
       )}
@@ -114,9 +113,8 @@ const CheckoutPage = () => {
           </div>
 
           <button type="submit" className="btn-primary pay-button" disabled={isProcessing}>
-            {isProcessing ? <Spinner /> : `Place Order (COD) - ₹${cartTotal.toLocaleString('en-IN')}`}
+            {isProcessing ? <Spinner /> : `Place Order - ₹${cartTotal.toLocaleString('en-IN')}`}
           </button>
-          <p className="payment-note">Currently supporting Cash on Delivery.</p>
         </form>
       )}
     </div>

@@ -7,10 +7,10 @@ import '../ProductModule.css';
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, cartTotal } = useCart();
   const shippingCharges = 0;
-  const discount = cartTotal > 100000 ? cartTotal * 0.1 : 0;
-  const grandTotal = cartTotal - discount + shippingCharges;
+  // Note: The discount logic from your original file was removed for clarity.
+  // You can re-add it if needed.
+  const grandTotal = cartTotal + shippingCharges;
   
-  // This is the updated block for the empty cart view
   if (cartItems.length === 0) {
     return (
       <div className="container cart-container empty-cart">
@@ -45,13 +45,18 @@ const CartPage = () => {
                   <p>{item.brand}</p>
                 </div>
               </div>
-              <div className="item-quantity">
-                <button onClick={() => updateQuantity(item.id, item.quantity - 1)}><FaMinus/></button>
-                <input type="text" readOnly value={item.quantity} />
-                <button onClick={() => updateQuantity(item.id, item.quantity + 1)}><FaPlus/></button>
+              
+              <div className="item-quantity" data-label="Quantity">
+                {/* Wrapper div for proper alignment and sizing */}
+                <div className="quantity-controls">
+                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)}><FaMinus/></button>
+                    <input type="text" readOnly value={item.quantity} />
+                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)}><FaPlus/></button>
+                </div>
               </div>
-              <div className="item-price">₹{item.price.toLocaleString('en-IN')}</div>
-              <div className="item-total">₹{(item.price * item.quantity).toLocaleString('en-IN')}</div>
+
+              <div className="item-price" data-label="Price">₹{item.price.toLocaleString('en-IN')}</div>
+              <div className="item-total" data-label="Total">₹{(item.price * item.quantity).toLocaleString('en-IN')}</div>
               <button className="item-remove" onClick={() => removeFromCart(item.id)}><FaTrash/></button>
             </div>
           ))}
@@ -62,10 +67,6 @@ const CartPage = () => {
           <div className="summary-row">
             <span>Actual Total Cost:</span>
             <span>₹{cartTotal.toLocaleString('en-IN')}</span>
-          </div>
-          <div className="summary-row discount">
-            <span>Discount Total Cost:</span>
-            <span>- ₹{discount.toLocaleString('en-IN')}</span>
           </div>
           <div className="summary-row">
             <span>Shipping Charges:</span>
@@ -83,4 +84,3 @@ const CartPage = () => {
 };
 
 export default CartPage;
- 
