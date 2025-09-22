@@ -123,4 +123,7 @@
     .partnershipGrid {
         grid-template-columns: 1fr;
     }
+    .content p {
+    text-align: justify;
+  }
 }
