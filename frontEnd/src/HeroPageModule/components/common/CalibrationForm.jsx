@@ -16,7 +16,7 @@ const CalibrationForm = () => {
   const servicePrices = {
     "basic-calibration": 5000,
     "intermediate-calibration": 30000,
-    "advanced-calibration": 50000,
+    "advanced-calibration": 60000,
   };
 
   const handleChange = (e) => {
@@ -63,7 +63,7 @@ const CalibrationForm = () => {
           <option value="">-- Select a Service --</option>
           <option value="basic-calibration">Basic [5.1.2, 5.1]</option>
           <option value="intermediate-calibration">Intermediate Calibration [5.1.4, 7.1.2, 7.1.4]</option>
-          <option value="advanced-calibration">Advanced Calibration [above 9.1.6]</option>
+          <option value="advanced-calibration">Advanced Calibration with Dirac [above 9.1.6]</option>
         </select>
       </div>
 

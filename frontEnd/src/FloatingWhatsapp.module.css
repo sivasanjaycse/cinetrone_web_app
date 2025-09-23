@@ -1,44 +1,61 @@
-.whatsappButton {
+/* This is the main container that is fixed to the corner */
+.floatingActionContainer {
     position: fixed;
     bottom: 30px;
     right: 30px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between the two icons */
+}
+
+/* A shared style for both circular buttons */
+.actionButton {
     width: 60px;
     height: 60px;
-    background-color: var(--primary-color);
-    color: var(--bg-black);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
     text-decoration: none;
     transition: transform 0.3s ease;
-    /* Animation definition */
+}
+
+.actionButton:hover {
+    transform: scale(1.1);
+}
+
+.icon {
+    font-size: 2.2rem;
+}
+
+/* UPDATED: Store button now matches the WhatsApp button style */
+.storeButton {
+    background-color: var(--primary-color);
+    color: var(--bg-black);
+    border: none;
+}
+
+/* Specific style for the WhatsApp button */
+.whatsappButton {
+    background-color: var(--primary-color);
+    color: var(--bg-black);
     animation: pulse 2.5s infinite;
 }
 
 .whatsappButton:hover {
-    transform: scale(1.1);
-    animation: none; /* Pause animation on hover for a smoother feel */
+    animation-play-state: paused; /* Pause animation on hover */
 }
 
-.whatsappIcon {
-    font-size: 2.2rem;
-}
-
-/* Keyframe animation for a subtle "pulse" movement */
+/* The pulse animation remains the same */
 @keyframes pulse {
-    0% {
+    0%, 100% {
         transform: scale(1);
         box-shadow: 0 4px 15px rgba(192, 160, 104, 0.2);
     }
     50% {
         transform: scale(1.05);
         box-shadow: 0 6px 20px rgba(192, 160, 104, 0.4);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 4px 15px rgba(192, 160, 104, 0.2);
     }
 }
