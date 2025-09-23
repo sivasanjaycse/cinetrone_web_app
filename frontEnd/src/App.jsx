@@ -12,6 +12,7 @@ import CareersPage from "./HeroPageModule/pages/CareersPage";
 import ScrollToTop from "./HeroPageModule/components/common/ScrollToTop";
 import "./HeroPageModule/HeroStyles.css"
 import FloatingWhatsApp from "./FloatingWhatsapp";
+
 // --- E-commerce Module Imports ---
 import EcommerceLayout from './EcommerceLayout'; // The new provider wrapper
 import ProductListPage from "./EcommerceModule/ProductModule/pages/ProductListPage";
@@ -24,6 +25,7 @@ import Footer from "./HeroPageModule/components/Footer/Footer";
 import AdminApp from "./AdminModule/Adminapp";
 import "./EcommerceModule/ecom.css"; // E-commerce specific styles
 import FailedProjectsPage from "./HeroPageModule/pages/FailedProjectsPage";
+import NotFoundPage from "./NotFoundPage";
 function App() {
   return (
     <>
@@ -34,6 +36,7 @@ function App() {
         {/* === MAIN WEBSITE ROUTES === */}
         {/* These routes do NOT have the e-commerce contexts */}
         <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/learning-from-challenges" element={<FailedProjectsPage />} />
         <Route path="/consultation" element={<ConsultationPage />} />
