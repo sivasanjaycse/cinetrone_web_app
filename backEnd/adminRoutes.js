@@ -141,9 +141,6 @@ router.put('/admin/orders/:orderId/status', async (req, res) => {
     }
 });
 
-// --- NEW: Gallery Management ---
-// 2. Add the new routes here without authMiddleware for consistency.
-
 // GET all display product images (for the public gallery)
 router.get('/display-products', async (req, res) => {
   try {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Counter = require('./Counter'); // Import the new Counter model
+const Counter = require('./Counter'); 
 
 const ProductSchema = new mongoose.Schema({
     product_id: { type: Number, unique: true },
@@ -17,8 +17,6 @@ const ProductSchema = new mongoose.Schema({
 });
 
 
-
-// NEW: Add a pre-save hook to auto-increment the product_id
 ProductSchema.pre('save', async function(next) {
     if (this.isNew) {
         try {

@@ -1,6 +1,5 @@
 const nodemailer = require("nodemailer");
 require('dotenv').config();
-// Create a transporter object using Gmail's SMTP service
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -25,13 +24,11 @@ const sendEmail = async (to, subject, text) => {
 
   try {
     const result = await transporter.sendMail(mailData);
-    console.log("✅ Email sent successfully!", result);
-    return result; // Return the result on success
+    console.log("Email sent successfully!", result);
+    return result; 
   } catch (error) {
-    console.error("❌ Error sending email:", error);
-    throw error; // Throw the error to be handled by the caller
+    console.error("Error sending email:", error);
+    throw error; 
   }
 };
-
-// Export the function to be used in other files
 module.exports = { sendEmail };

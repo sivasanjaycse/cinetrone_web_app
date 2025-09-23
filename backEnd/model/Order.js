@@ -4,7 +4,7 @@ const Counter = require('./Counter');
 const orderProductSchema = new mongoose.Schema({
     productId: { type: Number, ref: 'Product', required: true },
     quantity: { type: Number, required: true },
-    price: { type: Number, required: true } // Price at the time of order
+    price: { type: Number, required: true } 
 }, { _id: false });
 
 const shippingAddressSchema = new mongoose.Schema({
@@ -16,7 +16,7 @@ const shippingAddressSchema = new mongoose.Schema({
 
 
 
-const SIX_MONTHS_IN_SECONDS = 6 * 30 * 24 * 60 * 60; // Approx. 15,552,000 seconds
+const SIX_MONTHS_IN_SECONDS = 6 * 30 * 24 * 60 * 60; 
 
 const OrderSchema = new mongoose.Schema({
     orderId: { type: String, unique: true },
@@ -32,14 +32,12 @@ const OrderSchema = new mongoose.Schema({
     orderDate: { 
         type: Date, 
         default: Date.now,
-        // THIS IS THE NEW LINE:
         index: { expires: SIX_MONTHS_IN_SECONDS } 
     },
     deliveredDate: { type: Date }
 });
 
 
-// Pre-save hook to generate a unique 6-digit orderId
 OrderSchema.pre('save', async function(next) {
     if (this.isNew) {
         try {
@@ -48,7 +46,6 @@ OrderSchema.pre('save', async function(next) {
                 { $inc: { seq: 1 } },
                 { new: true, upsert: true }
             );
-            // Pad with leading zeros to ensure it's always 6 digits
             this.orderId = counter.seq.toString().padStart(6, '0');
             next();
         } catch (error) {

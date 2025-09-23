@@ -11,32 +11,22 @@ const Otp = require('./model/Otp');
 const Product = require('./model/Product');
 const Cart = require('./model/Cart');
 const { sendEmail } = require('./emailService');
-
-// IMPORT and USE the new admin routes
 const adminRoutes = require('./adminRoutes');
 
 
 
-// --- 1. INITIAL SETUP ---
+// --- INITIAL SETUP ---
 connectDB();
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// --- 2. CRITICAL MIDDLEWARE CONFIGURATION ---
-// The order of these 'app.use()' calls is crucial.
-
-// Step A: Configure CORS to grant permission for browser requests.
 app.use(cors({
-  origin: '*', // In production, replace with your frontend's actual domain
+  origin: '*', 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Step B: Configure the JSON body parser.
 app.use(express.json());
-
-
-// --- 3. SECURITY MIDDLEWARE DEFINITION ---
 const authMiddleware = (req, res, next) => {
     const authHeader = req.header('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -52,8 +42,6 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-// --- 4. API ROUTES ---
-// All route definitions must come AFTER the middleware configuration.
 app.use('/api', adminRoutes);
 // == Product Routes ==
 app.get('/api/products', async (req, res) => {
@@ -217,7 +205,6 @@ app.post('/api/orders', async (req, res) => {
             return res.status(400).json({ msg: 'Missing order data.' });
         }
 
-        // --- Server-side calculation of total amount for security ---
         const productIds = cartItems.map(item => item.id);
         const productDetails = await Product.find({ 'product_id': { $in: productIds } });
 
@@ -230,13 +217,12 @@ app.post('/api/orders', async (req, res) => {
             return {
                 productId: item.id,
                 quantity: item.quantity,
-                price: detail.discountedprice // Store the price at time of purchase
+                price: detail.discountedprice 
             };
         });
-        // --- End of calculation ---
 
         const newOrder = new Order({
-            email: shippingAddress.email, // Use email from form data
+            email: shippingAddress.email, 
             products: orderProducts,
             totalAmount: totalAmount,
             shippingAddress: shippingAddress,
@@ -281,7 +267,7 @@ app.get('/api/orders', authMiddleware, async (req, res) => {
                     ...p.toObject(),
                     productId: productMap[p.productId]
                 }))
-                .filter(p => p.productId); // Ensure product exists
+                .filter(p => p.productId);
 
             return {
                 ...order.toObject(),
@@ -297,8 +283,6 @@ app.get('/api/orders', authMiddleware, async (req, res) => {
     }
 });
 
-
-// --- 5. START SERVER ---
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
