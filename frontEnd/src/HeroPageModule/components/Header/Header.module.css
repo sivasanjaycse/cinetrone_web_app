@@ -20,15 +20,14 @@
   padding: 0 20px;
 }
 
-/* ⬇️ Added styles to align image and text */
 .nav__brand {
   display: flex;
   align-items: center;
-  gap: 12px; /* Adjust space between logo and text */
+  gap: 12px; 
   text-decoration: none;
 }
 
-/* ⬇️ Renamed from .logo to be more specific */
+
 .logoImage {
   height: 45px;
   width: auto;
@@ -43,7 +42,6 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin: 0;
-  /* Add this line for the glow effect */
   text-shadow: 0 0 10px rgba(192, 160, 104, 0.5);
 }
 
@@ -52,8 +50,8 @@
   display: flex;
   list-style: none;
   gap: 32px;
-  flex-wrap: wrap; /* ADD THIS LINE: Allows items to wrap to the next line */
-  justify-content: flex-end; /* OPTIONAL BUT RECOMMENDED: Keeps items aligned to the right */
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav__link {
@@ -100,16 +98,14 @@
 }
 
 @media (max-width: 768px) {
-    /* Hide the horizontal menu completely on mobile by default */
     .nav__menu {
         display: none;
     }
 
-    /* When the menu is active (clicked), display it as a vertical overlay */
     .nav__menu.active {
-        display: grid; /* Changed from flex */
-        grid-template-columns: repeat(2, 1fr); /* Creates two equal columns */
-        place-items: center; /* Centers items in their grid cell */
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        place-items: center;
         
         /* Overlay styles */
         position: fixed;
@@ -119,21 +115,18 @@
         background: rgba(0, 0, 0, 0.95);
         backdrop-filter: blur(10px);
         padding: 40px;
-        gap: 30px; /* Space between links */
+        gap: 30px;
         border-bottom: 1px solid rgba(192, 160, 104, 0.2);
     }
 
-    /* Show the hamburger button on mobile */
     .nav__toggle {
         display: flex;
     }
 
-    /* Hide the logo text to save space */
     .logoText {
         display: none;
     }
 
-    /* Animate the hamburger button to an 'X' when active */
     .nav__toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }

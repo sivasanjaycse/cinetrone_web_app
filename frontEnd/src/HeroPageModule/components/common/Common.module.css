@@ -90,21 +90,12 @@
   margin-top: 16px;
 }
 
-/* --- ADD THESE NEW STYLES FOR THE CENTERED LAYOUT --- */
-
-/*
-  This new layout class uses flexbox to center the content.
-  It will not affect the original .contentLayout grid.
-*/
 .centeredLayout {
   display: flex;
   justify-content: center;
   padding: 20px 0;
 }
 
-/*
-  This new text class styles the centered block.
-*/
 .centeredText {
   max-width: 700px;
   text-align: center;
@@ -124,31 +115,28 @@
     text-align: center;
   }
   .imageLeft {
-    order: 1; /* Image appears first */
+    order: 1; 
   }
   .contentRight {
     order: 2;
   }
   .imageRight {
-    order: 1; /* Image appears first */
+    order: 1; 
   }
   .contentLeft {
     order: 2;
   }
 }
 
-/* --- Mobile View for Centered Layout --- */
 @media (max-width: 768px) {
-  /* This will justify the paragraph text */
   .centeredText {
     text-align: justify;
   }
 
-  /* This rule specifically re-centers the button, overriding the justify */
   .centeredText .btn {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: fit-content; /* Ensures the button is only as wide as its content */
+    width: fit-content;
   }
 }

@@ -1,6 +1,4 @@
-// src/pages/TermsPage.jsx
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 import BackButton from "../components/BackButton/BackButton";
 
 const TermsPage = () => {

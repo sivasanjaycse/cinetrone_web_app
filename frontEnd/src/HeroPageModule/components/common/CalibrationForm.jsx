@@ -12,7 +12,6 @@ const CalibrationForm = () => {
     service: "",
   });
 
-  // Define service details for clarity in the message
   const serviceDetails = {
     "basic-calibration": {
       name: "Basic [5.1.2, 5.1]",
@@ -32,7 +31,6 @@ const CalibrationForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // --- UPDATED SUBMIT HANDLER ---
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -42,7 +40,6 @@ const CalibrationForm = () => {
         return;
     }
 
-    // 1. Construct the message with all form details
     const message = `
 *New Calibration Service Request*
 
@@ -53,13 +50,10 @@ const CalibrationForm = () => {
 I am ready to pay the above mentioned payment for the service
     `;
 
-    // 2. URL-encode the message for the link
     const encodedMessage = encodeURIComponent(message.trim());
 
-    // 3. Create the final WhatsApp URL
     const whatsappUrl = `https://wa.me/919360977893?text=${encodedMessage}`;
 
-    // 4. Open the URL in a new tab
     window.open(whatsappUrl, '_blank');
   };
 

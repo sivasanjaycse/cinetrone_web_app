@@ -1,8 +1,5 @@
 import styles from "./Footer.module.css";
-// Import the icons from your new file
 import { InstagramIcon, YouTubeIcon, LinkedInIcon, WhatsAppIcon } from './SocialIcons';
-// Assuming you are using React Router for navigation, import Link
-// If you are not, you can keep them as regular <a> tags.
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -41,7 +38,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* NEW SECTION: Quick Links */}
           <div className={styles.footer__section}>
             <h4 className={styles.footer__subtitle}>Quick Links</h4>
             <ul className={styles.footer__links}>
@@ -58,7 +54,6 @@ const Footer = () => {
           <div className={styles.footer__section}>
             <h4 className={styles.footer__subtitle}>Follow Us</h4>
             <div className={styles.footer__social}>
-              {/* Replace '#' with your actual social media URLs */}
               <a href="https://www.instagram.com/cinetrone_homecinemas?igsh=dDN4ODV3aWs2Ymp2&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <InstagramIcon />
               </a>

@@ -1,5 +1,4 @@
-// src/pages/ProjectsPage.jsx
-import { useState } from 'react'; // 1. Import useState
+import { useState } from 'react';
 import Header from "../components/Header/Header";
 import BackButton from "../components/BackButton/BackButton";
 import styles from "./PageStyles.module.css";
@@ -25,7 +24,6 @@ const projects = [
 const images = [Project1, Project2, Project3, Project4, Project5, Project6];
 
 const ProjectsPage = () => {
-    // 2. Add state to track the selected image
     const [selectedImage, setSelectedImage] = useState(null);
 
     return (
@@ -46,7 +44,6 @@ const ProjectsPage = () => {
                     <h3 style={{marginTop: '40px'}}>Project Gallery</h3>
                     <div className={styles.galleryGrid}>
                         {images.map((src, index) => (
-                            // 3. Add onClick to open the lightbox
                             <div 
                                 key={index} 
                                 className={styles.galleryItem}
@@ -58,8 +55,7 @@ const ProjectsPage = () => {
                     </div>
                 </div>
             </div>
-
-            {/* 4. Add the Lightbox JSX */}
+            
             {selectedImage && (
                 <div className={styles.lightboxOverlay} onClick={() => setSelectedImage(null)}>
                     <div className={styles.lightboxContent}>

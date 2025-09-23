@@ -1,15 +1,12 @@
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 import BackButton from "../components/BackButton/BackButton";
 import CalibrationForm from "../components/common/CalibrationForm";
-
 
 const CalibrationPage = () => {
   return (
     <>
       <Header />
       <BackButton />
-      {/* 2. Use the imported variable in the style attribute */}
       <header className="pageHeader">
         <h1 className="pageTitle">Dedicated Calibration</h1>
       </header>

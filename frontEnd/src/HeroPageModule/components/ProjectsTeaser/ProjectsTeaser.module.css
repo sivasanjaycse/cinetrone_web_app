@@ -30,16 +30,14 @@
 
 /* --- Mobile View --- */
 @media (max-width: 768px) {
-  /* This will justify the text in the content block */
   .content {
     text-align: justify;
   }
 
-  /* This specifically re-centers the button inside the content block */
   .content .btn {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: fit-content; /* Ensures button is only as wide as its text */
+    width: fit-content;
   }
 }

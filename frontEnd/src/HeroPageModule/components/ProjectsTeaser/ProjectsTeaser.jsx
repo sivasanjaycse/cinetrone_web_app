@@ -1,4 +1,3 @@
-// src/components/ProjectsTeaser/ProjectsTeaser.jsx
 import { Link } from "react-router-dom";
 import styles from "./ProjectsTeaser.module.css";
 

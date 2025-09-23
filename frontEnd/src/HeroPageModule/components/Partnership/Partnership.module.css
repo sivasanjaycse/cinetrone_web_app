@@ -1,4 +1,3 @@
-/* === Section Layout === */
 .partnershipGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -20,7 +19,6 @@
     margin-bottom: 30px;
 }
 
-/* === Image Grid & Video === */
 .imageGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -47,7 +45,6 @@
 
 .videoWrapper {
     width: 100%;
-    /* Changed: Updated to a standard 16:9 widescreen aspect ratio */
     aspect-ratio: 16 / 9;
     border-radius: 8px;
     overflow: hidden;
@@ -59,8 +56,6 @@
     border: none;
 }
 
-
-/* === Lightbox Styles (Copied for this component) === */
 .lightboxOverlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -76,12 +71,10 @@
 
 .lightboxContent {
     position: relative;
-    /* This container can be simplified as constraints are now on the image */
 }
 
 .lightboxImage {
     display: block;
-    /* Changed: Constraints are now directly on the image to ensure it fits the screen */
     max-width: 90vw;
     max-height: 90vh;
     border: 2px solid var(--border-color);

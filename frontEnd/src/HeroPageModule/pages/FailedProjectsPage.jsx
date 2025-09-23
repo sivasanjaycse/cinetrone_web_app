@@ -26,13 +26,12 @@ const FailedProjectsPage = () => {
                         </p>
                     </div>
 
-                    {/* Placeholder for two images */}
                     <div className={styles.imageGrid}>
                         <div className={styles.imageContainer}>
-                            <img src={Project4} alt="Placeholder for initial room assessment" />
+                            <img src={Project4} />
                         </div>
                         <div className={styles.imageContainer}>
-                            <img src={Project5} alt="Placeholder for final installation" />
+                            <img src={Project5} />
                         </div>
                     </div>
                 </div>

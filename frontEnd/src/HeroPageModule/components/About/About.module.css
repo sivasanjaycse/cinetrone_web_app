@@ -34,15 +34,12 @@
 /* --- Mobile View --- */
 @media (max-width: 768px) {
   .aboutContent {
-    /* This will justify the text on screens 768px or narrower */
     text-align: justify;
   }
-
-  /* ADD THIS RULE: To center the button specifically */
   .aboutContent .btn {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: fit-content; /* Ensures the button is only as wide as its content */
+    width: fit-content;
   }
 }

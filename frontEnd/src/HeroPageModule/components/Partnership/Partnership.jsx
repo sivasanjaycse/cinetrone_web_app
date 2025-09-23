@@ -1,10 +1,9 @@
-import { useState } from 'react'; // 1. Import useState
+import { useState } from 'react';
 import styles from "./Partnership.module.css";
 import PartnerLogo from '../../assets/partnercert.png';
 import Sponser1 from '../../assets/sponser1.jpeg';
 
 const Partnership = () => {
-    // 2. Add state to manage the selected image
     const [selectedImage, setSelectedImage] = useState(null);
 
     return (
@@ -18,11 +17,9 @@ const Partnership = () => {
                             We are the only certified active dealer in Tamil Nadu for Oxykraft, the OEM manufacturer of OSD speakers. This direct partnership guarantees authentic products with full service backing.
                         </p>
                         <div className={styles.imageGrid}>
-                            {/* 3. Add onClick to open the lightbox for the logo */}
                             <div className={styles.logoContainer} onClick={() => setSelectedImage(PartnerLogo)}>
                                 <img src={PartnerLogo} alt="Oxykraft Partner Certificate" className={styles.logo}/>
                             </div>
-                            {/* 3. Add onClick to open the lightbox for the sponsor image */}
                             <div className={styles.extraImageContainer} onClick={() => setSelectedImage(Sponser1)}>
                                 <img src={Sponser1} alt="Sponsor" className={styles.extraImage}/>
                             </div>
@@ -40,7 +37,6 @@ const Partnership = () => {
                 </div>
             </div>
 
-            {/* 4. Add the Lightbox JSX */}
             {selectedImage && (
                 <div className={styles.lightboxOverlay} onClick={() => setSelectedImage(null)}>
                     <div className={styles.lightboxContent}>

@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import Header from "../components/Header/Header";
 import BackButton from "../components/BackButton/BackButton";
 import styles from "./PageStyles.module.css";
-import api from "../../api"; // Your configured axios instance
+import api from "../../api";
 
 const ProductsPage = () => {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // NEW: State to manage the selected image for the lightbox
     const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
@@ -44,7 +43,6 @@ const ProductsPage = () => {
                     {!loading && !error && (
                         <div className={styles.galleryGrid}>
                             {images.map((image) => (
-                                // NEW: Added onClick to open the lightbox
                                 <div 
                                     key={image._id} 
                                     className={styles.galleryItem} 
@@ -58,7 +56,6 @@ const ProductsPage = () => {
                 </div>
             </div>
 
-            {/* NEW: Lightbox JSX, rendered conditionally */}
             {selectedImage && (
                 <div className={styles.lightboxOverlay} onClick={() => setSelectedImage(null)}>
                     <div className={styles.lightboxContent}>

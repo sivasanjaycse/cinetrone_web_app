@@ -12,7 +12,7 @@ const ConsultationForm = ({ serviceType }) => {
     service: serviceType || "",
   });
 
-  // Combined service details for clarity
+  // Combined service details 
   const serviceDetails = {
     "entry-level": { 
       name: "Entry level hometheater 5.1, 7.1 setup", 
@@ -32,7 +32,6 @@ const ConsultationForm = ({ serviceType }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // --- UPDATED SUBMIT HANDLER ---
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -42,7 +41,7 @@ const ConsultationForm = ({ serviceType }) => {
         return;
     }
 
-    // 1. Construct the message with all form details
+
     const message = `
 *New Consultation Request*
 
@@ -53,13 +52,10 @@ const ConsultationForm = ({ serviceType }) => {
 I am ready to pay the above mentioned payment for the service.
     `;
 
-    // 2. URL-encode the message for the link
     const encodedMessage = encodeURIComponent(message.trim());
 
-    // 3. Create the final WhatsApp URL
     const whatsappUrl = `https://wa.me/919360977893?text=${encodedMessage}`;
 
-    // 4. Open the URL in a new tab
     window.open(whatsappUrl, '_blank');
   };
 

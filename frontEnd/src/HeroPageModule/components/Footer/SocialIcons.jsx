@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Using props allows you to pass className, width, height, etc. from the parent.
 const iconProps = {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24",

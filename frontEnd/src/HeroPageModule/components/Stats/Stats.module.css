@@ -6,14 +6,14 @@
     text-align: center;
 }
 
-/* === Grid Container (Uses your responsive auto-fit) === */
+/* === Grid Container === */
 .statsContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 32px;
 }
 
-/* === Stat Item Box (New "Gold Box" Design) === */
+/* === Stat Item Box === */
 .statItem {
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
     border: 1px solid rgba(192, 160, 104, 0.2);
     border-radius: 12px;
     transition: all 0.3s ease-in-out;
-    text-decoration: none; /* Retained: Ensures link has no underline */
+    text-decoration: none; 
 }
 
 .statItem:hover {
@@ -31,24 +31,23 @@
     background: linear-gradient(145deg, rgba(192, 160, 104, 0.15), rgba(192, 160, 104, 0.08));
 }
 
-/* Retained: Class for the clickable item to add pointer */
 .clickable {
     cursor: pointer;
 }
 
 /* === Text Styles === */
 .statValue {
-    display: block; /* Retained: Good for structure */
+    display: block;
     font-family: "Playfair Display", serif;
     font-size: 3.5rem;
     font-weight: 700;
     color: var(--primary-color);
     line-height: 1.1;
-    margin-bottom: 8px; /* Retained: Good for spacing */
+    margin-bottom: 8px;
 }
 
 .statLabel {
-    display: block; /* Retained: Good for structure */
+    display: block;
     font-size: 1rem;
     color: var(--text-muted);
     margin-top: 8px;

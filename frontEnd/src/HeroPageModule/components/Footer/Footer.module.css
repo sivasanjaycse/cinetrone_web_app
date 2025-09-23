@@ -2,7 +2,7 @@
   background: #1a1a1a;
   border-top: 1px solid rgba(255, 215, 0, 0.2);
   padding: 60px 0 30px;
-  margin-top: 60px; /* <-- Add this line */
+  margin-top: 60px;
 }
 
 .container {
@@ -11,14 +11,13 @@
   padding: 0 20px;
 }
 
-/* In Footer.module.css */
 
 .footer__content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
   margin-bottom: 32px;
-  align-items: start; /* <-- Add this line */
+  align-items: start;
 }
 
 .footer__title {
@@ -54,12 +53,10 @@
   color: #c0a068;
 }
 
-/* --- ADD THIS RULE FOR THE ICONS --- */
 .footer__social a svg {
   width: 24px;
   height: 24px;
 }
-/* ------------------------------------ */
 
 .contactInfo p {
   margin-bottom: 16px;

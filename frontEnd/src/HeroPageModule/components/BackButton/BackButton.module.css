@@ -4,7 +4,7 @@
   align-items: center;
   gap: 8px;
   position: absolute;
-  top: 120px; /* Below header */
+  top: 120px; 
   left: 30px;
   color: var(--primary-color);
   font-weight: 500;

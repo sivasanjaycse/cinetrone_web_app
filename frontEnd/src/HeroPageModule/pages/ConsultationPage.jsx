@@ -1,6 +1,4 @@
-// src/pages/ConsultationPage.jsx
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 import BackButton from "../components/BackButton/BackButton";
 import ConsultationForm from "../components/common/ConsultationForm";
 

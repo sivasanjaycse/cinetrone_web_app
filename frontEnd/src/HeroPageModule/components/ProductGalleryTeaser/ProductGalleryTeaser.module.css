@@ -38,7 +38,6 @@
   border-color: var(--primary-hover-color);
 }
 
-/* === Lightbox Styles (Corrected) === */
 .lightboxOverlay {
     position: fixed;
     top: 0;
@@ -57,12 +56,10 @@
 
 .lightboxContent {
     position: relative;
-    /* This container now just centers the image */
 }
 
 .lightboxImage {
     display: block;
-    /* Changed: Constrain the image to 70% of the viewport size */
     max-width: 70vw;
     max-height: 70vh;
     border: 2px solid var(--border-color);
@@ -88,7 +85,6 @@
 }
 
 
-/* === Animations (No Change) === */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
