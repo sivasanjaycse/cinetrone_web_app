@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../../api';
-import styles from './AdminDisplayProducts.module.css'; // Import the new theme
+import styles from './AdminDisplayProducts.module.css';
 
 const AdminDisplayProducts = () => {
     const [images, setImages] = useState([]);
@@ -9,7 +9,6 @@ const AdminDisplayProducts = () => {
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
 
-    // Function to fetch all images
     const fetchImages = async () => {
         try {
             setLoading(true);
@@ -22,12 +21,10 @@ const AdminDisplayProducts = () => {
         }
     };
 
-    // Fetch images on component mount
     useEffect(() => {
         fetchImages();
     }, []);
 
-    // Handler for adding a new image
     const handleAddImage = async (e) => {
         e.preventDefault();
         if (!newImageUrl.trim()) {
@@ -40,13 +37,12 @@ const AdminDisplayProducts = () => {
             await api.post('/api/display-products', { url: newImageUrl });
             setNewImageUrl('');
             setMessage('Image added successfully!');
-            await fetchImages(); // Refresh the list
+            await fetchImages();
         } catch (err) {
             setError(err.response?.data?.msg || 'Failed to add image.');
         }
     };
 
-    // Handler for deleting an image
     const handleDeleteImage = async (id) => {
         if (!window.confirm('Are you sure you want to delete this image?')) {
             return;
@@ -56,7 +52,7 @@ const AdminDisplayProducts = () => {
         try {
             await api.delete(`/api/display-products/${id}`);
             setMessage('Image deleted successfully!');
-            await fetchImages(); // Refresh the list
+            await fetchImages();
         } catch (err) {
             setError(err.response?.data?.msg || 'Failed to delete image.');
         }

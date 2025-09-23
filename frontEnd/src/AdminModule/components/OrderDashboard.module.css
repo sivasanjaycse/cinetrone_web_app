@@ -76,12 +76,10 @@
 
 /* === Responsive Mobile Version === */
 @media (max-width: 768px) {
-    /* Hide the original table header on mobile */
     .adMoOrderTable thead {
         display: none;
     }
 
-    /* Make table elements stack vertically */
     .adMoOrderTable,
     .adMoOrderTable tbody,
     .adMoOrderTable tr,
@@ -90,7 +88,6 @@
         width: 100%;
     }
 
-    /* Style each row as a distinct card */
     .adMoOrderTable tr {
         margin-bottom: 20px;
         border: 1px solid var(--border-color);
@@ -98,26 +95,23 @@
         padding: 10px;
     }
 
-    /* Style each cell for the label-value layout */
     .adMoOrderTable td {
         display: flex;
         justify-content: center;
         align-items: right;
         padding: 12px 5px;
         border-bottom: 1px solid var(--border-color);
-        text-align: right; /* Aligns the data value to the right */
+        text-align: right;
     }
 
-    /* Remove the border from the last cell in each card */
     .adMoOrderTable tr td:last-child {
         border-bottom: none;
     }
 
-    /* Create the data labels using the 'data-label' attribute */
     .adMoOrderTable td::before {
         content: attr(data-label);
         font-weight: bold;
         color: var(--primary-color);
-        text-align: right; /* Aligns the label to the left */
+        text-align: right; 
     }
 }

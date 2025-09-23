@@ -50,12 +50,12 @@
 }
 
 .statusInstock {
-    background-color: #2ed573; /* Green */
+    background-color: #2ed573;
     color: var(--bg-black);
 }
 
 .statusOos {
-    background-color: #6c757d; /* Muted Grey */
+    background-color: #6c757d;
     color: var(--text-light);
 }
 
@@ -72,7 +72,7 @@
     padding: 8px 12px; 
     cursor: pointer; 
     border-radius: 5px;
-    white-space: nowrap; /* Prevents button text from wrapping */
+    white-space: nowrap;
 }
 
 .btnDanger { 
@@ -93,7 +93,6 @@
 
 /* === Responsive Mobile Version === */
 @media (max-width: 768px) {
-    /* Hide the original table header */
     .productTable thead {
         display: none;
     }
@@ -102,7 +101,7 @@
     .productTable tbody,
     .productTable tr,
     .productTable td {
-        display: block; /* Make table elements stack vertically */
+        display: block; 
         width: 100%;
     }
 
@@ -114,30 +113,29 @@
     }
 
     .productTable td {
-        display: flex; /* Creates the label-value layout */
-        justify-content: center; /* Pushes label and value to opposite ends */
+        display: flex;
+        justify-content: center;
         align-items: center;
         padding: 12px 5px;
         border-bottom: 1px solid var(--border-color);
-        text-align: right; /* Aligns the data to the right */
+        text-align: right;
     }
 
     .productTable tr td:last-child {
-        border-bottom: none; /* Removes the border from the last item in a card */
+        border-bottom: none;
     }
 
-    /* Create the data labels from the 'data-label' attribute */
     .productTable td::before {
         content: attr(data-label);
         font-weight: bold;
         color: var(--primary-color);
-        text-align: left; /* Aligns the label to the left */
+        text-align: left;
         padding-right: 15px;
     }
 
     .actionButtons {
-        flex-direction: column; /* Stack action buttons vertically */
-        align-items: flex-end; /* Align them to the right */
+        flex-direction: column;
+        align-items: flex-end; 
         gap: 8px;
     }
 }

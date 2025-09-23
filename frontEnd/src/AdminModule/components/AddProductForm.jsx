@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import api from '../../api';
-import styles from './AddProductForm.module.css'; // Import the CSS module
+import styles from './AddProductForm.module.css';
 
 const AddProductForm = ({ onProductAdded }) => {
     const initialState = {
@@ -36,7 +36,7 @@ const AddProductForm = ({ onProductAdded }) => {
         try {
             await api.post('/api/admin/products', newProduct);
             onProductAdded();
-            setNewProduct(initialState); // Reset form
+            setNewProduct(initialState);
             alert('Product added successfully!');
         } catch (err) {
             alert('Failed to add product.');

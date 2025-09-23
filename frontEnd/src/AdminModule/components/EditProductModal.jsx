@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../../api';
-import styles from './EditProductModal.module.css'; // Import the CSS module
+import styles from './EditProductModal.module.css';
 
 const EditProductModal = ({ product, onClose, onProductUpdated }) => {
     const [formData, setFormData] = useState({ ...product });

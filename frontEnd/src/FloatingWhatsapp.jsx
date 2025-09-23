@@ -5,8 +5,6 @@ import styles from './FloatingWhatsApp.module.css';
 
 const FloatingWhatsApp = () => {
   const location = useLocation();
-
-  // This condition checks if the current path starts with '/store'
   const showStoreIcon = !location.pathname.startsWith('/store');
 
   return (

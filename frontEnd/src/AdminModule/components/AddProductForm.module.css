@@ -84,7 +84,6 @@
     align-items: center;
 }
 
-/* Button Styles (re-used from admin theme) */
 .btnPrimary { 
     background-color: var(--primary-color); 
     color: var(--bg-black); 

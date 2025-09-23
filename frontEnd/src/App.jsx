@@ -14,7 +14,7 @@ import "./HeroPageModule/HeroStyles.css"
 import FloatingWhatsApp from "./FloatingWhatsapp";
 
 // --- E-commerce Module Imports ---
-import EcommerceLayout from './EcommerceLayout'; // The new provider wrapper
+import EcommerceLayout from './EcommerceLayout';
 import ProductListPage from "./EcommerceModule/ProductModule/pages/ProductListPage";
 import ProductDetailPage from './EcommerceModule/ProductModule/pages/ProductDetailPage';
 import CartPage from './EcommerceModule/ProductModule/pages/CartPage';
@@ -23,7 +23,7 @@ import ProfilePage from './EcommerceModule/ProductModule/pages/ProfilePage';
 import LoginApp from './EcommerceModule/LoginModule/JSX/LoginApp';
 import Footer from "./HeroPageModule/components/Footer/Footer";
 import AdminApp from "./AdminModule/Adminapp";
-import "./EcommerceModule/ecom.css"; // E-commerce specific styles
+import "./EcommerceModule/ecom.css"; 
 import FailedProjectsPage from "./HeroPageModule/pages/FailedProjectsPage";
 import NotFoundPage from "./NotFoundPage";
 function App() {
@@ -49,10 +49,7 @@ function App() {
         {/* === E-COMMERCE ROUTES === */}
         {/* All routes nested here will have the providers from EcommerceLayout */}
         <Route path="/store" element={<EcommerceLayout />}>
-          {/* The "index" route renders at the parent path: "/store" */}
           <Route index element={<ProductListPage />} />
-          
-          {/* These routes are relative to "/store" */}
           <Route path="products/:productId" element={<ProductDetailPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />

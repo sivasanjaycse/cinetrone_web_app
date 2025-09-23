@@ -7,7 +7,7 @@ import './AdminApp.css';
 
 const AdminApp = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [view, setView] = useState('products'); // 'products', 'orders', or 'gallery'
+    const [view, setView] = useState('products');
 
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);

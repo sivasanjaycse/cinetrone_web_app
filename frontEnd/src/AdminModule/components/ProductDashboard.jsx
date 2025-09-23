@@ -37,8 +37,8 @@ const ProductDashboard = () => {
     };
 
     const handleUpdateSuccess = () => {
-        setEditingProduct(null); // Close the modal
-        fetchProducts(); // Refresh the list
+        setEditingProduct(null); 
+        fetchProducts(); 
     };
 
     const handleToggleStock = async (productId) => {

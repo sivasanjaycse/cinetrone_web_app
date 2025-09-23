@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../../api';
-// We are reusing the modal component from the main product module
 import OrderDetailsModal from '../../EcommerceModule/ProductModule/components/OrderDetailsModal';
-import styles from './OrderDashboard.module.css'; // Import the new theme
+import styles from './OrderDashboard.module.css';
 
 const OrderDashboard = () => {
     const [orders, setOrders] = useState([]);
@@ -24,7 +23,7 @@ const OrderDashboard = () => {
     const handleStatusChange = async (orderId, newStatus) => {
         try {
             await api.put(`/api/admin/orders/${orderId}/status`, { status: newStatus });
-            fetchOrders(); // Refresh list after update
+            fetchOrders();
         } catch (err) {
             alert('Failed to update status.');
         }

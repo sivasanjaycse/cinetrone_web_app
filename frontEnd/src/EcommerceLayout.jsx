@@ -5,7 +5,7 @@ import Layout from './EcommerceModule/components/Layout/Layout';
 /**
  * This component wraps the entire e-commerce section.
  * Its only job is to provide the necessary contexts (Auth, Cart, etc.)
- * to the e-commerce pages. It then renders your original visual <Layout />.
+ * to the e-commerce pages. It then renders original visual <Layout />.
  */
 function EcommerceLayout() {
   return (
