@@ -9,93 +9,103 @@ import './CheckoutPage.css';
 import '../ProductModule.css';
 
 const CheckoutPage = () => {
-  const { isLoggedIn, user } = useAuth();
-  const { cartItems, cartTotal, clearCart } = useCart();
-  const { showNotification } = useNotification();
-  const navigate = useNavigate();
+    const { isLoggedIn, user } = useAuth();
+    const { cartItems, cartTotal, clearCart } = useCart();
+    const { showNotification } = useNotification();
+    const navigate = useNavigate();
 
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(!isLoggedIn);
-  const [formData, setFormData] = useState({
-    name: '',
-    mobile: '',
-    email: '',
-    address: '',
-    pincode: ''
-  });
+    const [isProcessing, setIsProcessing] = useState(false);
+    // New state to control the maintenance overlay
+    const [showMaintenanceOverlay, setShowMaintenanceOverlay] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '', mobile: '', email: '', address: '', pincode: ''
+    });
 
-  useEffect(() => {
-    if (isLoggedIn && user) {
-      setFormData({
-        name: user.name || '',
-        mobile: user.mobile || '',
-        email: user.email || '',
-        address: '',
-        pincode: ''
-      });
-      setShowLoginForm(false);
+    useEffect(() => {
+        if (isLoggedIn && user) {
+            setFormData({
+                name: user.name || '',
+                mobile: user.mobile || '',
+                email: user.email || '',
+                address: '',
+                pincode: ''
+            });
+        }
+    }, [isLoggedIn, user]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handlePayment = async (e) => {
+        e.preventDefault();
+        // Instead of processing payment, show the maintenance overlay
+        setShowMaintenanceOverlay(true);
+
+        /* // --- TODO: Re-enable this block for payment gateway integration ---
+        setIsProcessing(true);
+        try {
+            const orderPayload = {
+                shippingAddress: formData,
+                cartItems: cartItems.map(item => ({ id: item.id, quantity: item.quantity })),
+            };
+            const response = await api.post('/api/orders', orderPayload);
+            showNotification(`Order confirmed! Your order number is: ${response.data.order.orderId}`, 'success');
+            clearCart();
+            setTimeout(() => navigate('/store/profile'), 4000);
+        } catch (error) {
+            showNotification(error.response?.data?.msg || 'Failed to place order. Please try again.', 'error');
+            setIsProcessing(false);
+        }
+        */
+    };
+
+    // New function to handle WhatsApp redirection
+    const handleWhatsAppEnquiry = () => {
+        const itemsText = cartItems.map(item => 
+            `- ${item.name} (Qty: ${item.quantity})`
+        ).join('\n');
+
+        const message = `
+*New Order Enquiry*
+
+Hello, I would like to place an order for the following items:
+${itemsText}
+
+*Total Amount:* ₹${cartTotal.toLocaleString('en-IN')}
+
+*Delivery Details:*
+Name: ${formData.name}
+Mobile: ${formData.mobile}
+Address: ${formData.address}, ${formData.pincode}
+        `;
+
+        const encodedMessage = encodeURIComponent(message.trim());
+        const whatsappUrl = `https://wa.me/919360977893?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
+    if (cartItems.length === 0 && !isProcessing) {
+        navigate('/store');
+        return null;
     }
-  }, [isLoggedIn, user]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+    return (
+        <div className="container checkout-container">
+            <h1 className="page-title">Order Summary</h1>
 
-  const handlePayment = async (e) => {
-    e.preventDefault();
-    setIsProcessing(true);
+            {/* The Login Prompt for non-logged-in users is removed for guest checkout */}
+            {/* You can add it back if you want to force login */}
 
-    try {
-      // Prepare the data payload for the backend
-      const orderPayload = {
-        shippingAddress: formData,
-        cartItems: cartItems.map(item => ({ id: item.id, quantity: item.quantity })),
-      };
-
-      // Send the order to the backend API
-      const response = await api.post('/api/orders', orderPayload);
-
-      showNotification(`Order confirmed! Your order number is: ${response.data.order.orderId}`, 'success');
-      clearCart();
-      
-      // Redirect to the profile page to see the new order
-      setTimeout(() => navigate('/store/profile'), 4000);
-
-    } catch (error) {
-      showNotification(error.response?.data?.msg || 'Failed to place order. Please try again.', 'error');
-      setIsProcessing(false);
-    }
-  };
-
-  // Redirect if cart is empty and an order is not being processed
-  if (cartItems.length === 0 && !isProcessing) {
-    navigate('/store');
-    return null;
-  }
-
-  return (
-    <div className="container checkout-container">
-      <h1 className="page-title">Order Summary</h1>
-
-      {showLoginForm && (
-        <div className="login-prompt">
-          <h2>You are not logged in</h2>
-          <p>Login for a faster checkout experience or continue as a guest.</p>
-          <div className="prompt-buttons">
-            <button className="btn-primary" onClick={() => navigate('/store/login')}>Proceed to Login</button>
-          </div>
-        </div>
-      )}
-
-      {!showLoginForm && (
-        <form className="checkout-form" onSubmit={handlePayment}>
-          <h2>Delivery Information</h2>
-          <div className="form-group">
-            <label className="form-label" htmlFor="name">Full Name</label>
-            <input type="text" id="name" name="name" className="form-control" value={formData.name} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
+            <form className="checkout-form" onSubmit={handlePayment}>
+                <h2>Delivery Information</h2>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="name">Full Name</label>
+                    <input type="text" id="name" name="name" className="form-control" value={formData.name} onChange={handleChange} required />
+                </div>
+                {/* ... other form groups ... */}
+                 <div className="form-group">
             <label className="form-label" htmlFor="mobile">Mobile Number</label>
             <input type="tel" id="mobile" name="mobile" className="form-control" value={formData.mobile} onChange={handleChange} required />
           </div>
@@ -112,13 +122,26 @@ const CheckoutPage = () => {
             <input type="text" id="pincode" name="pincode" className="form-control" value={formData.pincode} onChange={handleChange} required />
           </div>
 
-          <button type="submit" className="btn-primary pay-button" disabled={isProcessing}>
-            {isProcessing ? <Spinner /> : `Place Order - ₹${cartTotal.toLocaleString('en-IN')}`}
-          </button>
-        </form>
-      )}
-    </div>
-  );
+                <button type="submit" className="btn-primary pay-button" disabled={isProcessing}>
+                    {isProcessing ? <Spinner /> : `Place Order - ₹${cartTotal.toLocaleString('en-IN')}`}
+                </button>
+            </form>
+
+            {/* New: Conditionally rendered maintenance overlay */}
+            {showMaintenanceOverlay && (
+                <div className="maintenance-overlay">
+                    <div className="maintenance-card">
+                        <h3>Payment Gateway Under Maintenance</h3>
+                        <p>Our online payment system is temporarily unavailable. You can complete your order by sending the details to us via WhatsApp.</p>
+                        <div className="maintenance-buttons">
+                            <button className="btn-secondary" onClick={() => setShowMaintenanceOverlay(false)}>Close</button>
+                            <button className="btn-primary" onClick={handleWhatsAppEnquiry}>Enquire via WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default CheckoutPage;
