@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './ImageSlider.module.css';
-import ImageWithLoader from '../../components/ImageWithLoader/ImageWithLoader'; // Updated import path
+import ImageWithLoader from '../../components/ImageWithLoader/ImageWithLoader';
 
 const ImageSlider = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -11,9 +11,7 @@ const ImageSlider = ({ images }) => {
 
   return (
     <div className={styles.sliderContainer}>
-      {/* Replace the main img tag with our new component */}
       <ImageWithLoader
-        // The key ensures the loader re-triggers on image change
         key={activeIndex} 
         src={images[activeIndex]}
         alt={`Product view ${activeIndex + 1}`}

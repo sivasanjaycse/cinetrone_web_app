@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from '../Styles/SuccessMessage.module.css' // Import the new stylesheet
+import styles from '../Styles/SuccessMessage.module.css'
 
 const SuccessMessage = ({ title, text, onClose }) => {
   const messageJSX = (
@@ -10,7 +10,6 @@ const SuccessMessage = ({ title, text, onClose }) => {
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.text}>{text}</p>
         
-        {/* New wrapper div to center the button */}
         <div className={styles.modalActions}>
           <button className="login-btn login-btn--primary" onClick={onClose}>Continue</button>
         </div>

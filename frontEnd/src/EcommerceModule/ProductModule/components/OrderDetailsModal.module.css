@@ -95,19 +95,19 @@
 }
 
 .delivered {
-    background-color: #2ed573; /* Green */
+    background-color: #2ed573;
 }
 
 .shipped {
-    background-color: #1e90ff; /* Blue */
+    background-color: #1e90ff;
 }
 
 .processing {
-    background-color: #ffa502; /* Orange */
+    background-color: #ffa502; 
 }
 
 .cancelled {
-    background-color: #ff4757; /* Red */
+    background-color: #ff4757;
     color: var(--text-light);
 }
 

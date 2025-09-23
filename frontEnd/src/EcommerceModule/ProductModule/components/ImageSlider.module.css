@@ -1,8 +1,7 @@
-/* === Base Styles (Desktop) === */
 .sliderContainer {
     position: relative;
     width: 100%;
-    max-width: 600px; /* Max width on large screens */
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -16,14 +15,14 @@
 }
 
 .thumbnails {
-    display: flex; /* Centered row on desktop */
+    display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 15px;
 }
 
 .thumbnail {
-    width: 80px; /* Fixed size on desktop */
+    width: 80px;
     height: 60px;
     object-fit: cover;
     border-radius: 4px;
@@ -40,20 +39,16 @@
     border-color: var(--primary-color);
 }
 
-
-/* === Mobile Styles (for the 3x2 grid) === */
 @media (max-width: 768px) {
-    /* On mobile, thumbnails become a grid */
     .thumbnails {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Creates 3 columns */
+        grid-template-columns: repeat(3, 1fr);
         gap: 10px;
     }
 
-    /* Thumbnails now scale to fit the grid columns */
     .thumbnail {
         width: 100%;
         height: auto;
-        aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+        aspect-ratio: 4 / 3;
     }
 }

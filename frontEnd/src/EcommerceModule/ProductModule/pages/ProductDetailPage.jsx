@@ -64,7 +64,6 @@ const ProductDetailPage = () => {
         <div className="product-info">
           <h1 className="product-name">{product.name}</h1>
           
-          {/* Stock Status Display */}
           <p className={product.outOfStock ? 'status-oos-text' : 'status-instock-text'}>
               {product.outOfStock ? 'Currently Unavailable' : 'In Stock'}
           </p>
@@ -75,7 +74,6 @@ const ProductDetailPage = () => {
             <span className="product-mrp">M.R.P.: <del>₹{product.actualprice.toLocaleString('en-IN')}</del></span>
           </div>
           
-          {/* Add to Cart button is disabled based on stock status */}
           <button 
               onClick={handleAddToCart} 
               className="btn-primary"

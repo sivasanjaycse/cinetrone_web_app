@@ -7,8 +7,6 @@ import '../ProductModule.css';
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, cartTotal } = useCart();
   const shippingCharges = 0;
-  // Note: The discount logic from your original file was removed for clarity.
-  // You can re-add it if needed.
   const grandTotal = cartTotal + shippingCharges;
   
   if (cartItems.length === 0) {
@@ -47,7 +45,6 @@ const CartPage = () => {
               </div>
               
               <div className="item-quantity" data-label="Quantity">
-                {/* Wrapper div for proper alignment and sizing */}
                 <div className="quantity-controls">
                     <button onClick={() => updateQuantity(item.id, item.quantity - 1)}><FaMinus/></button>
                     <input type="text" readOnly value={item.quantity} />

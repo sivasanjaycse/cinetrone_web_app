@@ -35,15 +35,14 @@
   color: #c0a068;
   margin-bottom: 8px;
   font-size: 20px;
-  font-family: 'Playfair Display', serif; /* Added for consistency */
+  font-family: 'Playfair Display', serif; 
 }
 
 .text {
-  color: #a9a9a9; /* Slightly lighter than the original for better readability */
+  color: #a9a9a9; 
   margin: 0 0 24px 0;
 }
 
-/* This new class centers the button */
 .modalActions {
   display: flex;
   justify-content: center;

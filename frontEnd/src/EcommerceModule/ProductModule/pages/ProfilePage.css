@@ -62,23 +62,19 @@
     font-weight: bold;
 }
 
-/* Styles for the logged-in view remain the same... */
 .profile-container {
     padding: 60px 20px;
 }
 
-/* Updated styles for the NOT logged-in view */
 .profile-container.not-logged-in {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* Adjusted height to give some vertical space from header/footer */
     min-height: calc(100vh - 250px);
 }
 
-/* New Style: Large, stylized title from the image */
 .profile-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
@@ -88,7 +84,6 @@
     text-shadow: 0 0 10px rgba(192, 160, 104, 0.3);
 }
 
-/* New Style: For the prompt message */
 .login-prompt-message {
     color: var(--text-muted);
     font-size: 1.1rem;
@@ -96,7 +91,7 @@
     max-width: 400px;
 }
 
-/* New Style: The golden "GO TO LOGIN" button */
+
 .login-button {
     background-color: var(--primary-color);
     color: var(--bg-black);
@@ -115,15 +110,13 @@
     background-color: var(--primary-hover-color);
 }
 
-
-/* Styles for the logged-in view (can remain below) */
 .profile-layout {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 40px;
     align-items: flex-start;
 }
-/* Add these styles to your existing ProfilePage.css */
+
 
 .order-history h2 {
     border-bottom: 1px solid var(--border-color);

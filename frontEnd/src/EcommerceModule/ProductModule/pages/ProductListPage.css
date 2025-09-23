@@ -47,13 +47,9 @@
     padding: 60px 20px;
 }
 
-/* ... .filter-controls, .search-bar, etc. styles remain the same ... */
-
 .product-grid {
     display: grid;
-    /* Changed: Explicitly set 3 columns for desktop */
     grid-template-columns: repeat(3, 1fr);
-    /* Changed: Slightly increased gap for larger cards */
     gap: 50px; 
 }
 
@@ -62,11 +58,9 @@
     margin-top: 50px;
 }
 
-/* ... (existing styles) */
 .status-instock-text { color: green; font-weight: bold; margin-bottom: 20px; }
 .status-oos-text { color: red; font-weight: bold; margin-bottom: 20px; }
 
-/* Style for the disabled button */
 .btn-primary:disabled {
     background-color: #555;
     cursor: not-allowed;
@@ -76,14 +70,12 @@
 /* New: Media queries for responsive columns */
 @media (max-width: 992px) {
     .product-grid {
-        /* 2 columns for tablets */
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
     .product-grid {
-        /* 1 column for mobile */
         grid-template-columns: 1fr;
     }
 }

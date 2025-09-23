@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
-// Import all your form and overlay components
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
@@ -11,7 +10,6 @@ import SuccessMessage from './SuccessMessage';
 import ErrorOverlay from './ErrorOverlay'; 
 import ResetPasswordForm from "./ResetPasswordForm";
 
-// Import all your CSS
 import '../Styles/comman.css';
 import '../Styles/layout.css';
 import '../Styles/LoginVariables.css';
@@ -33,7 +31,7 @@ const LoginApp = () => {
   const [registrationData, setRegistrationData] = useState(null);
 
   const navigate = useNavigate();
-  const auth = useAuth(); // Use the authentication context
+  const auth = useAuth(); 
 
   const handleLogin = async (email, password) => {
     setLoading(true);
@@ -118,7 +116,7 @@ const LoginApp = () => {
 
   const handleCloseSuccess = () => {
     setSuccessInfo(null);
-    navigate('/store/profile'); // Redirect user to their profile after success
+    navigate('/store/profile'); 
   };
   
   const handleCloseError = () => setErrorInfo(null);

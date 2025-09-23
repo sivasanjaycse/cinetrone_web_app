@@ -1,13 +1,10 @@
-/* File: theme.css */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* RGB versions for opacity control (Dark Mode) */
     --color-gray-400-rgb: 119, 124, 124;
     --color-teal-300-rgb: 50, 184, 198;
     --color-gray-300-rgb: 167, 169, 169;
     --color-gray-200-rgb: 245, 245, 245;
 
-    /* Semantic Color Tokens (Dark Mode) */
     --color-background: var(--color-charcoal-700);
     --color-surface: var(--color-charcoal-800);
     --color-text: var(--color-gray-200);
@@ -36,7 +33,6 @@
   }
 }
 
-/* Links and Divider */
 .link, .link-btn {
   color: var(--cinetrone-gold);
   text-decoration: none;

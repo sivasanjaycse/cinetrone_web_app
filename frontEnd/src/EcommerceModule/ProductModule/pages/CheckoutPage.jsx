@@ -40,7 +40,6 @@ const CheckoutPage = () => {
 
     const handlePayment = async (e) => {
         e.preventDefault();
-        // Instead of processing payment, show the maintenance overlay
         setShowMaintenanceOverlay(true);
 
         /* // --- TODO: Re-enable this block for payment gateway integration ---
@@ -95,16 +94,12 @@ Address: ${formData.address}, ${formData.pincode}
         <div className="container checkout-container">
             <h1 className="page-title">Order Summary</h1>
 
-            {/* The Login Prompt for non-logged-in users is removed for guest checkout */}
-            {/* You can add it back if you want to force login */}
-
             <form className="checkout-form" onSubmit={handlePayment}>
                 <h2>Delivery Information</h2>
                 <div className="form-group">
                     <label className="form-label" htmlFor="name">Full Name</label>
                     <input type="text" id="name" name="name" className="form-control" value={formData.name} onChange={handleChange} required />
                 </div>
-                {/* ... other form groups ... */}
                  <div className="form-group">
             <label className="form-label" htmlFor="mobile">Mobile Number</label>
             <input type="tel" id="mobile" name="mobile" className="form-control" value={formData.mobile} onChange={handleChange} required />

@@ -1,4 +1,3 @@
-// File: src/components/OtpOverlay.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -6,10 +5,9 @@ const OtpOverlay = ({ email, onVerifyOtp, onResendOtp, onClose, loading, error }
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [resendCountdown, setResendCountdown] = useState(30);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
-  const [focusedIndex, setFocusedIndex] = useState(-1); // For focus styling
+  const [focusedIndex, setFocusedIndex] = useState(-1);
   const timerRef = useRef(null);
 
-  // --- Timer Logic ---
   useEffect(() => {
     startResendTimer();
     return () => clearInterval(timerRef.current);
@@ -34,7 +32,6 @@ const OtpOverlay = ({ email, onVerifyOtp, onResendOtp, onClose, loading, error }
     startResendTimer();
   };
 
-  // --- Form Handlers ---
   const handleOtpChange = (element, index) => {
     if (isNaN(element.value)) return;
     const newOtp = [...otp];
@@ -56,7 +53,6 @@ const OtpOverlay = ({ email, onVerifyOtp, onResendOtp, onClose, loading, error }
     onVerifyOtp(otp.join(""));
   };
 
-  // --- Inline Styles for Overlay and Inputs ---
   const overlayStyles = {
     position: 'fixed',
     top: '0',
@@ -82,7 +78,6 @@ const OtpOverlay = ({ email, onVerifyOtp, onResendOtp, onClose, loading, error }
     width: '90%'
   };
 
-  // --- NEW: Styles for the OTP inputs ---
   const otpInputsContainerStyles = {
     display: 'flex',
     gap: '12px',
@@ -118,7 +113,6 @@ const OtpOverlay = ({ email, onVerifyOtp, onResendOtp, onClose, loading, error }
     return style;
   };
 
-  // --- Component JSX ---
   const otpOverlayJSX = (
     <div style={overlayStyles}>
       <div style={cardStyles}>
@@ -127,14 +121,12 @@ const OtpOverlay = ({ email, onVerifyOtp, onResendOtp, onClose, loading, error }
         <form id="otp-form" className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="otp-input" className="form-label">Verification Code</label>
-            {/* UPDATED: Using style object for the container */}
             <div style={otpInputsContainerStyles}>
               {otp.map((data, index) => (
                 <input
                   key={index}
                   type="text"
                   maxLength="1"
-                  // UPDATED: Using dynamic styles instead of classes
                   style={getOtpDigitStyle(index, data)}
                   value={data}
                   onChange={e => handleOtpChange(e.target, index)}
