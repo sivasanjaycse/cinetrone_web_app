@@ -9,28 +9,61 @@ const ConsultationForm = ({ serviceType }) => {
     area: "",
     city: "",
     pincode: "",
-    service: serviceType || "", // Initialize service with prop or empty string
+    service: serviceType || "",
   });
 
-  // Define consultation service prices
-  const consultationServicePrices = {
-    "entry-level": 357, // Example price for Entry level hometheater without acoustic
-    "dolby-atmos": 799, // Example price for Dolby Atmos setup without acoustic
-    "turnkey": 1499, // Example price for Turn key home cinema setup
+  // Combined service details for clarity
+  const serviceDetails = {
+    "entry-level": { 
+      name: "Entry level hometheater 5.1, 7.1 setup", 
+      price: 357 
+    },
+    "dolby-atmos": { 
+      name: "Dolby Atmos 5.1.2 setup", 
+      price: 799 
+    },
+    "turnkey": { 
+      name: "Entire Turnkey Project", 
+      price: 1499 
+    },
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // --- UPDATED SUBMIT HANDLER ---
   const handleSubmit = (e) => {
     e.preventDefault();
-    const selectedServicePrice = consultationServicePrices[formData.service] || 0;
-    alert(`Redirecting to payment gateway for ₹${selectedServicePrice}...`);
+    
+    const service = serviceDetails[formData.service];
+    if (!service) {
+        alert("Please select a valid service.");
+        return;
+    }
+
+    // 1. Construct the message with all form details
+    const message = `
+*New Consultation Request*
+
+*Name:* ${formData.name}
+*Address:* ${formData.flatNo}, ${formData.street}, ${formData.area}, ${formData.city} - ${formData.pincode}
+*Service:* ${service.name}
+*Consultation Fee:* ₹${service.price.toLocaleString('en-IN')}
+I am ready to pay the above mentioned payment for the service.
+    `;
+
+    // 2. URL-encode the message for the link
+    const encodedMessage = encodeURIComponent(message.trim());
+
+    // 3. Create the final WhatsApp URL
+    const whatsappUrl = `https://wa.me/919360977893?text=${encodedMessage}`;
+
+    // 4. Open the URL in a new tab
+    window.open(whatsappUrl, '_blank');
   };
 
-  // Get the current payment amount based on selected service
-  const currentPaymentAmount = consultationServicePrices[formData.service] || 0;
+  const currentPaymentAmount = serviceDetails[formData.service]?.price || 0;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -67,7 +100,7 @@ const ConsultationForm = ({ serviceType }) => {
       </div>
 
       <button type="submit" className={`${styles.btn} ${styles.paymentBtn}`} disabled={!formData.service}>
-        Proceed to Pay (₹{currentPaymentAmount})
+        Book via WhatsApp (₹{currentPaymentAmount.toLocaleString('en-IN')})
       </button>
     </form>
   );

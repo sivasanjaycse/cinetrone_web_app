@@ -9,29 +9,61 @@ const CalibrationForm = () => {
     area: "",
     city: "",
     pincode: "",
-    service: "", // Added service to formData
+    service: "",
   });
 
-  // Define service prices
-  const servicePrices = {
-    "basic-calibration": 5000,
-    "intermediate-calibration": 30000,
-    "advanced-calibration": 60000,
+  // Define service details for clarity in the message
+  const serviceDetails = {
+    "basic-calibration": {
+      name: "Basic [5.1.2, 5.1]",
+      price: 5000,
+    },
+    "intermediate-calibration": {
+      name: "Intermediate Calibration [5.1.4, 7.1.2, 7.1.4]",
+      price: 30000,
+    },
+    "advanced-calibration": {
+      name: "Advanced Calibration with Dirac [above 9.1.6]",
+      price: 60000,
+    },
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // --- UPDATED SUBMIT HANDLER ---
   const handleSubmit = (e) => {
     e.preventDefault();
-    // In the future, this will handle payment integration
-    const selectedServicePrice = servicePrices[formData.service] || 0;
-    alert(`Redirecting to payment gateway for ₹${selectedServicePrice}...`);
+    
+    const service = serviceDetails[formData.service];
+    if (!service) {
+        alert("Please select a valid service.");
+        return;
+    }
+
+    // 1. Construct the message with all form details
+    const message = `
+*New Calibration Service Request*
+
+*Name:* ${formData.name}
+*Address:* ${formData.flatNo}, ${formData.street}, ${formData.area}, ${formData.city} - ${formData.pincode}
+*Service:* ${service.name}
+*Amount:* ₹${service.price.toLocaleString('en-IN')}
+I am ready to pay the above mentioned payment for the service
+    `;
+
+    // 2. URL-encode the message for the link
+    const encodedMessage = encodeURIComponent(message.trim());
+
+    // 3. Create the final WhatsApp URL
+    const whatsappUrl = `https://wa.me/919360977893?text=${encodedMessage}`;
+
+    // 4. Open the URL in a new tab
+    window.open(whatsappUrl, '_blank');
   };
 
-  // Get the current payment amount based on selected service
-  const currentPaymentAmount = servicePrices[formData.service] || 0;
+  const currentPaymentAmount = serviceDetails[formData.service]?.price || 0;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -68,7 +100,7 @@ const CalibrationForm = () => {
       </div>
 
       <button type="submit" className={`${styles.btn} ${styles.paymentBtn}`} disabled={!formData.service}>
-        Proceed to Pay (₹{currentPaymentAmount})
+        Contact Via Whatsapp (₹{currentPaymentAmount.toLocaleString('en-IN')})
       </button>
     </form>
   );
