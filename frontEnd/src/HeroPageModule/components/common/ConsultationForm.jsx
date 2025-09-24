@@ -20,11 +20,11 @@ const ConsultationForm = ({ serviceType }) => {
     },
     "dolby-atmos": { 
       name: "Dolby Atmos 5.1.2 setup", 
-      price: 799 
+      price: 357
     },
     "turnkey": { 
       name: "Entire Turnkey Project", 
-      price: 1499 
+      price: 357 
     },
   };
 

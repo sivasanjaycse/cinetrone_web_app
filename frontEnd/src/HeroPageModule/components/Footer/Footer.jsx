@@ -35,9 +35,18 @@ const Footer = () => {
                 <br />
                 +91 93456 59852
               </p>
+              {/* --- Added Email Section --- */}
+              <p>
+                <strong>Email:</strong>
+                <br />
+                <a href="mailto:cinetronehomecinemas@gmail.com">
+                  cinetronehomecinemas@gmail.com
+                </a>
+              </p>
             </div>
           </div>
 
+          {/* Section 3: Quick Links */}
           <div className={styles.footer__section}>
             <h4 className={styles.footer__subtitle}>Quick Links</h4>
             <ul className={styles.footer__links}>
