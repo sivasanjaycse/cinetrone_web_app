@@ -27,7 +27,7 @@ const Partnership = () => {
                     </div>
                     <div className={styles.videoWrapper}>
                         <iframe 
-                            src="https://www.youtube.com/embed/C_OyyR-Vqv0?rel=0" 
+                            src="https://www.youtube.com/embed/bhhvc5z8pd8" 
                             title="YouTube video player" 
                             frameBorder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
